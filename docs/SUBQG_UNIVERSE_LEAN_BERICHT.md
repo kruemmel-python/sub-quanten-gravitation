@@ -29,7 +29,7 @@ strukturellen Garantien, die unabhängig von diesen Namen gelten müssen.
 | `admit` | 0 |
 | `sorryAx` | 0 |
 | Compilerfehler | 0 |
-| SHA-256 der Lean-Datei | `9604A284E4CA559507AB4EA2B7BFF0AAF0DEF51DC8A649FC77D45846A057403E` |
+| SHA-256 der Lean-Datei | `F5D229DB869AA75E96F0E2D1066F885B76EA17A8EF3D17DAAD45A1410445F5A6` |
 
 ## Formal geprüfte Aussagen
 

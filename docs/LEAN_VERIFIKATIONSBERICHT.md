@@ -42,7 +42,7 @@ Dateien wurden auf Laufwerk H: angelegt und nach der Prüfung entfernt.
 | Datei | Theoreme | Definitionen | Strukturen | SHA-256 |
 |---|---:|---:|---:|---|
 | `formal/SubQGDerivation.lean` | 34 | 29 | 3 | `690D5C19EC443047724E8283FBAFFDF94914114D90AB751182E685CC07A04377` |
-| `formal/SubQGUniverseEvolution.lean` | 18 | 6 | 5 | `9604A284E4CA559507AB4EA2B7BFF0AAF0DEF51DC8A649FC77D45846A057403E` |
+| `formal/SubQGUniverseEvolution.lean` | 18 | 6 | 5 | `F5D229DB869AA75E96F0E2D1066F885B76EA17A8EF3D17DAAD45A1410445F5A6` |
 | `docs/SubQG_Formal_Verification_2026-11-11.lean` | 23 | 0 | 0 | `AFAC549278B84251DDDDD7D912E3B2E5C675BAE8C15ED0924B47D771B2FEF3D8` |
 | **Gesamt** | **75** | **35** | **8** | — |
 

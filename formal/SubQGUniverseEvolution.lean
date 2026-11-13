@@ -107,8 +107,7 @@ theorem actualize_is_causal_extension (state : RelationalState)
   · exact Finset.subset_union_left
   · exact Finset.subset_union_left
   · exact Finset.subset_union_left
-  · simpa [actualize, Nat.add_assoc] using
-      (Nat.le_add_right state.relationalClock (newEdges.card + newSimplices.card))
+  · simp [actualize, Nat.add_assoc]
   · simp [actualize]
 
 theorem actualization_clock_increment (state : RelationalState)

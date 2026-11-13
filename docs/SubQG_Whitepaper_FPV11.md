@@ -1,29 +1,30 @@
 ---
-title: "SubQG Genesis, Objektgravitation & Formale Verifikation: Von Phasen zur Raumzeit, Trägheit, Asteroidenflug, orthogonalen Multiversen und Lean-4-Beweisen"
-subtitle: "Relationale Graphgeometrie, variationelle Kantenmetrik, universeller freier Fall, suprafluides Vakuum, überlappende Multiplex-Spacetimes und formal verifizierte Formelanalysen im Forschungsstand FPV11"
+title: "SubQG Genesis, emergente Universen, Objektgravitation & formale Verifikation"
+subtitle: "Von prä-geometrischen Phasen zu Raumzeit, unbekannten Strukturen, gebundenen Kandidaten, Multiversen und Lean-4-Beweisen"
 author: "Ralf Krümmel · SubQG-Forschungsprojekt"
-date: "11. November 2026"
-version: "FPV11 · Forschungswhitepaper 2.1 (Erweiterte Fassung)"
+date: "13. November 2026"
+version: "FPV11 · Forschungswhitepaper 3.0 (Universumsentwicklung)"
 lang: de-DE
 ---
 
 # Zusammenfassung
 
-Subquantum Graphity (SubQG) untersucht, ob sich Raumzeit, interne Uhren, Trägheit und Gravitationswechselwirkungen aus einem substratfreien Quantennetzwerk herleiten lassen, dessen fundamentale Zustände vor-geometrisch durch Phasenbeziehungen beschrieben werden. Der vorliegende Forschungsstand **FPV11 (Version 2.1)** erweitert das bisherige Fundament um die vollständige mathematische, numerische und maschinengeprüfte Verifikation des Modells:
+Subquantum Graphity (SubQG) untersucht, ob sich Raumzeit, interne Uhren, Trägheit und Gravitationswechselwirkungen aus einem substratfreien Quantennetzwerk herleiten lassen, dessen fundamentale Zustände vor-geometrisch durch Phasenbeziehungen beschrieben werden. Der vorliegende Forschungsstand **FPV11 (Version 3.0)** erweitert das bisherige Fundament um eine additive, ausschließlich SubQG-interne Universumsentwicklung sowie deren numerische und formale Prüfung:
 
 1. **Das SubQG Apfel-Experiment (Objektgravitation & Äquivalenzprinzip):** Aus der geschlossenen variationellen Kantenmetrik-Gleichung $(\mu \mathbb{I} + \kappa \mathcal{L}_{\mathrm{edge}})x_e = -\beta w_e \rho_e$ und der unitären Soliton-Wellenpaketdynamik wird hergeleitet, warum derselbe Mechanismus sowohl die massenproportionale Haltekraft (das Gewicht $F_{\mathrm{Halten}} \propto m_{\mathrm{inert}}$) als auch den universellen, massenunabhängigen freien Fall ($\ddot{X}_{\mathrm{frei}} \approx g_{\mathrm{eff}}$) konkreter, ausgedehnter Resonanzobjekte erzeugt – ohne jedes Hardcoding von $F = mg$. Über eine experimentelle Massenspanne von $9{,}00\times$ stimmen Fallbeschleunigungen auf $\eta_{\max} = 0{,}0255\,\%$ überein; die lineare Gewichtsregression erreicht $R^2 = 0{,}999994$. Alle 10 Pflichtkontrollen (C1–C10) sind bestanden.
 2. **Das SubQG-Vakuum und der Asteroidenflug:** Es wird analytisch und numerisch bewiesen, dass der interplanetare Raum im SubQG kein leeres „Nichts“ ist, sondern ein aktives, kondensiertes Quantennetzwerk mit Phasenüberlappung $w_e \approx 1$. Für Geschwindigkeiten unterhalb der emergenten Grenzgeschwindigkeit $c = 2 J_0 L_0$ verhält sich dieses Vakuum verlustfrei und suprafluid (Reibungswiderstand $F_{\mathrm{drag}} = 0$). Ein frei fliegender Asteroid gleitet geradlinig mit $v = \mathrm{const.}$, während bei der Annäherung an einen Himmelskörper eine rein refraktive Geodätenkrümmung durch Kantenverkürzung $L_e = L_0 e^{x_e} < L_0$ eintritt.
 3. **Orthogonale überlappende Multiversen am selben Ort:** Auf einem gemeinsamen Knotenensemble $\mathcal{V}$ wird gezeigt, dass zwei vollständige 3D-Universen am exakt selben Ort zur selben Zeit existieren können, ohne sich gravitativ oder elektromagnetisch zu beeinflussen, sofern ihre Kantennetzwerke über orthogonale Phasenräume $\langle A | B \rangle = 0$ entkoppelt sind ($E_A \cap E_B = \emptyset$).
-4. **Erweiterte Formelanalyse & Formale Lean-4-Verifikation:** Sämtliche 28 Formeldateien (kanonische Reihe 01–19 sowie 9 historische/erweiterte Kontrollen) wurden durch die kompilierte C++-Engine `math_research_v03.exe` (`formula-check`) ausgewertet: Alle 23 Identitäten bestanden die numerischen Stichproben fehlerfrei; alle 5 Negativkontrollen wurden am ersten Gitterpunkt korrekt widerlegt. Darüber hinaus wurden alle Gleichungen in der formalen Beweisassistenz **Lean 4 (v4.34.1)** in `SubQG_Formal_Verification_2026-11-11.lean` mathematisch axiomatisch bewiesen (Exitcode 0, 0 Warnungen, 0 Fehler, keine Beweisabkürzungen wie `sorry` oder `admit`).
-5. **Software- & Testverifikation:** Die Gesamttestsuite umfasst **272 von 272 bestandene Tests** (inklusive aller Blueprint-Gates). Das Projekt verfügt über interaktive 3D-Cinematic-Viewer für das Apfel-Experiment, den Asteroidenflug im Quantenvakuum sowie überlappende Multiversen.
+4. **Emergente Universumsentwicklung ohne importierte Astrophysik:** `SubQGUniverseEvolution` startet mit einem relationalen Ereignis ohne räumliche Kante und aktualisiert Knoten, Kanten, Simplexe und interne Zeit ausschließlich über die vorhandene SubQG-Phasendynamik und Energie–Metrik-Rückkopplung. Ein kanonischer Lauf erreicht 2.000 Epochen beziehungsweise zwei Milliarden explizit kalibrierte Anzeigejahre. Er archiviert auch Strukturen, die zunächst unbekannt bleiben. Stern-, Planeten-, Nebel-, Galaxie- und Supernovabezeichnungen sind nachträgliche Signaturhypothesen und keine vorprogrammierten Körperklassen.
+5. **Erweiterte Formelanalyse & formale Lean-4-Verifikation:** Die Lean-Suite umfasst nun drei Dateien mit **75 kernelgeprüften Theoremen**: 34 Sätze zum SubQG-Kern, 23 Formeltheoreme einschließlich aller 20 nummerierten Formeln und 18 Sätze zur Universumsentwicklung. Der gemeinsame Lauf mit **Lean 4.34.1** endet mit Exitcode 0, ohne Warnungen, Fehler oder Beweisabkürzungen wie `sorry`, `admit` oder `sorryAx`.
+6. **Software- & Testverifikation:** Die Gesamttestsuite umfasst **360 von 360 bestandene JavaScript-Tests**. Zusätzlich bestehen alle 8 internen Langzeitgates des Zwei-Milliarden-Jahre-Laufs. Bereits vorhandene Viewer bleiben Demonstratoren; eine frei begehbare WebView der neuen Universumsentwicklung wird erst auf diesem validierten Kern aufgebaut.
 
-**Schlüsselwörter:** SubQG; Genesis; Äquivalenzprinzip; universeller freier Fall; träge Masse; Kantenmetrik; suprafluides Vakuum; Asteroidenflug; MOND-Crossover; orthogonale Multiversen; Multiplex-Graphen; MathResearchEngine; Lean 4 Beweisverifikation.
+**Schlüsselwörter:** SubQG; Genesis; emergente Raumzeit; Universumsentwicklung; unbekannte Strukturen; relationale Zeit; Äquivalenzprinzip; Kantenmetrik; MOND-Crossover; orthogonale Multiversen; Lean 4; formale Verifikation.
 
 ---
 
 # 1. Forschungsziel und erweiterte Aussageebenen
 
-Die zentrale Fragestellung lautet: **Wie erzeugen gemeinsame mikroskopische Phasenregeln nicht nur ein emergentes Raumzeit-Kontinuum, sondern die konkrete Dynamik von makroskopischen Objekten (Trägheit, Gewicht, freier Flug), wie verhalten sich mehrere solche Raumzeiten zueinander, und wie lassen sich diese Beziehungen maschinell formal verifizieren?**
+Die zentrale Fragestellung lautet: **Wie erzeugen gemeinsame mikroskopische Phasenregeln ein emergentes Raumzeit-Kontinuum, darin persistente und möglicherweise völlig neue Strukturen sowie die konkrete Dynamik makroskopischer Objekte; wie verhalten sich mehrere solche Raumzeiten zueinander, und welche Teile dieser Entwicklung lassen sich maschinell formal verifizieren?**
 
 Zur wissenschaftlichen Exaktheit werden sechs Ebenen strikt getrennt:
 
@@ -33,6 +34,7 @@ Zur wissenschaftlichen Exaktheit werden sechs Ebenen strikt getrennt:
 | **Analytische Folgerung** | Ausdrückliche mathematische Konsequenzen (z. B. Ehrenfest-Theorem auf dem Graphen, Stationaritätsbedingung der Kantenmetrik, Entkopplung orthogonaler Kanten). |
 | **Formale Lean-4-Beweise** | Maschinengeprüfte Theoreme und Negativ-Existenzbeweise in Lean 4 ohne `sorry`, die logische Zirkelschlüsse und algebraische Fehler ausschließen. |
 | **Numerischer Befund** | Deterministisch reproduzierte Messwerte aus RK4-Zeitschritt-Integrationen, Graphen-Relaxation, `formula-check`-Rasterproben und statistischen Regressionen. |
+| **Nachträgliche Signaturhypothese** | Revidierbare Einordnung einer entstandenen Struktur als möglicher Stern, Planet, Nebel, galaktischer Komplex oder Phasenfreisetzungsereignis. Die Klassifikation wirkt nicht auf die Dynamik zurück. |
 | **Visualisierung** | Interaktive 3D-WebGL/Cinematic-Darstellungen zur Veranschaulichung der berechneten Zustände (kein Ersatz für mathematische Beweise). |
 | **Physikalische Hypothese** | Interpretation als mikroskopische Grundlage für die reale Gravitation, Kosmologie ohne Dunkle Materie und Multiplex-Kosmologien. |
 
@@ -47,7 +49,8 @@ Das FPV11-Projekt führt die bisherigen separaten Stränge in einer einheitliche
 | **SubQG Apfel-Experiment (Objektgravitation)** | `subqg_apple_experiment.mjs`, `apple_experiment.test.mjs`, `apple_experiment_results.json` | Unabhängige Trägheitskalibrierung $m_{\mathrm{inert}} = \Delta P / \Delta \dot{X}$, massenunabhängiger freier Fall ($\eta \le 0{,}03\,\%$), massenproportionales Gewicht ($R^2 > 0{,}99999$), Handkraft-Sättigung ($F_{\max}$), 10 Kontrollläufe (C1–C10). |
 | **Asteroidenflug & Suprafluides Vakuum** | `subqg_cinematic_cosmos.html`, `subqg_apple_experiment.mjs` | Nachweis des widerstandslosen Flugs im kondensierten Quantenvakuum ($F_{\mathrm{drag}} = 0$ für $v < c$), metrische Refraktion an Kantenkontraktionen $L_e = e^{x_e}$. |
 | **Orthogonale Multiplex-Multiversen** | `subqg_dual_multiverse.html`, `subqg_multiverse_phases.mjs` | Koexistenz zweier unabhängiger Raumzeiten auf denselben Knoten $\mathcal{V}$ ohne wechselseitige Licht- oder Gravitationsübertragung durch Kanten-Orthogonalität $\langle A | B \rangle = 0$. |
-| **Formale Verifikation & MRE-Engine** | `SUBQG_FORMELANALYSEBERICHT_ERWEITERT_2026-11-11.md`, `SubQG_Formal_Verification_2026-11-11.lean` | 28/28 `.mreformula`-Dateien ausgewertet; 19 kanonische Theoreme in Lean 4 maschinengeprüft; 18/18 Engine-Selbsttests bestanden. |
+| **Emergente Universumsentwicklung** | `subqg_universe_evolution.mjs`, `universe_evolution.test.mjs`, `subqg_universe_2gyr_validation.json` | Raumloser Anfang, append-only Kausalaktualisierung, Zwei-Milliarden-Jahre-Kalibrierung, dauerhaftes Archiv unbekannter Strukturen und nachträgliche Mehrhypothesenanalyse. |
+| **Formale Verifikation & MRE-Engine** | `SubQGDerivation.lean`, `SubQGUniverseEvolution.lean`, `SubQG_Formal_Verification_2026-11-11.lean` | 75 Lean-Theoreme in drei Dateien maschinengeprüft; keine Beweislückenmarker; 18/18 MRE-Engine-Selbsttests bestanden. |
 | **Genesis Master-Simulation** | `subqg_genesis.mjs`, `genesis-results.json` | Selbstorganisation von Dimension ($d \approx 3{,}0$) und Grenzgeschwindigkeit $c$ aus Phasenüberlappungen. |
 | **Galaktische Skalierung & MOND** | `subqg_unified_proof_engine.mjs` | Nichtlineare Graphenleitfähigkeit $\sigma(g) = g / (g + a_0)$, flache Rotationskurven und Tully-Fisher-Skalierung $v^4 \propto M$. |
 
@@ -205,24 +208,81 @@ Für eine mathematisch konsistente Behandlung einer transienten Brücke zwischen
 
 ---
 
-# 7. Formale Verifikation: MathResearchEngine (`.mreformula`) & Lean 4
+# 7. Emergente Universumsentwicklung aus SubQG
+
+## 7.1 Kein vorgegebener Raum und keine externe Weltbühne
+
+Die Universumsentwicklung startet nicht in einem bereits vorhandenen dreidimensionalen Raum. Ausgangspunkt ist ausschließlich ein **latentes SubQG-Phasennetz** aus potentiellen Knoten, Phasenbeziehungen und lokalen Kopplungsmöglichkeiten. Erst kausal stabile Aktualisierungen erzeugen einen zusammenhängenden Sektor, in dem Abstände, Nachbarschaft und zeitliche Ordnung relational definiert werden. Die Bezeichnungen „Position“, „Stern“, „Planet“ oder „Galaxie“ sind deshalb keine Eingaben der Dynamik, sondern nachträgliche Beschreibungen gemessener Netzwerksignaturen.
+
+## 7.2 Kausale Aktualisierung und relationale Uhr
+
+Für einen Epochenschritt $n\rightarrow n+1$ werden ausschließlich lokal zugelassene Änderungen übernommen:
+
+$$V_{n+1}=V_n\cup\Delta V_n,\qquad E_{n+1}=E_n\cup\Delta E_n,\qquad \Sigma_{n+1}=\Sigma_n\cup\Delta\Sigma_n.$$
+
+Dabei sind $V$ die aktualisierten Knoten, $E$ die relationalen Kanten und $\Sigma$ die abgeschlossenen kausalen Simplizes. Die interne Uhr wird nicht von außen vorgegeben, sondern durch tatsächlich entstandene Relationen fortgeschrieben:
+
+$$T_{n+1}=T_n+|\Delta E_n|+|\Delta\Sigma_n|.$$
+
+Leere Rechenschritte ohne neue Relationen erzeugen somit keine relationale Zeit. Diese Monotonie, die Irreversibilität der Aktualisierung und die Beschränkung auf den latenten Graphen sind in Lean formalisiert.
+
+## 7.3 Ausschließlich SubQG-interne Dynamik
+
+Die Implementierung `SubQGUniverseEvolution` entwickelt die komplexen Feldamplituden $\psi$, ihre konjugierten Impulse $\pi$, den Graph-Laplacian und die rückgekoppelte Kantenmetrik weiter. Sie importiert weder $\Lambda$CDM-Dichteparameter noch klassische Teilchenbahnen, N-Body-Kräfte, NASA-Evolutionskurven oder externe Sternhydrodynamik. Stabilisierung, Kontraktion, Ströme und lokale Energieanhäufungen müssen aus der vorhandenen SubQG-Dynamik entstehen. Dadurch wird das gewünschte Modell nicht nachträglich durch bekannte astronomische Objektklassen gesteuert.
+
+## 7.4 Bedeutung der simulierten zwei Milliarden Jahre
+
+Der kanonische Lauf umfasst 2.000 Epochen. Für die Webdarstellung wird vorläufig eine reine Anzeigekalibrierung von einer Million Jahren pro Epoche verwendet:
+
+$$t_{\mathrm{display}}=N_{\mathrm{epoch}}\,\Delta t_{\mathrm{cal}},\qquad 2000\times10^6\,\mathrm{Jahre}=2\times10^9\,\mathrm{Jahre}.$$
+
+Diese Zuordnung ist **noch keine aus SubQG hergeleitete physikalische Zeitskala**. Die eigentliche Simulation verwendet die relationale Uhr $T$. Eine empirisch begründete Brücke zwischen $T$, SI-Sekunden und kosmologischen Jahren bleibt eine offene Kalibrierungsaufgabe.
+
+## 7.5 Unbekannte Strukturen und nachträgliche Klassifikation
+
+Persistente Strukturen werden zunächst neutral als Archivobjekte gespeichert. Zu den Rohmerkmalen gehören unter anderem lokale Energie, Kohärenz, metrische Kontraktion, Strom und Fluss, Persistenzdauer sowie relationale Abstände. Ein separates Analysemodul darf diese unveränderten Messdaten anschließend mit bekannten Signaturen vergleichen. Die Klassifikation wirkt jedoch **nicht** auf die Dynamik zurück. So bleiben neuartige oder zunächst nicht zuordenbare Gebilde sichtbar, anstatt zwangsweise als bekannte Galaxie, Nebel oder Planet etikettiert zu werden.
+
+Der derzeitige Signaturkatalog enthält vorsichtige Kandidatenbezeichnungen für strahlende Kerne beziehungsweise Sterne, gebundene Orbitalstrukturen beziehungsweise Planeten, diffuse Wolken beziehungsweise Nebel, größere Komplexe beziehungsweise Galaxien und abrupte Phasenfreisetzungen beziehungsweise Supernova-Ereignisse. Diese Namen sind Interpretationen von Netzwerkmerkmalen, keine bereits empirisch bestätigten astronomischen Identifikationen.
+
+## 7.6 Kanonischer Zwei-Milliarden-Jahre-Lauf
+
+| Messgröße | Ergebnis |
+|---|---:|
+| Simulierte Anzeigeepochen | 2.000 Mio. Jahre |
+| Latente Möglichkeitszustände | 320 |
+| Aktualisierte Knoten | 311 |
+| Relationale Kanten | 905 |
+| Kausale Simplizes | 720 |
+| Relationale Uhr $T$ | 1.625 |
+| Archivierte persistente Objekte | 172 |
+| Davon weiterhin unbekannt | 64 |
+| Kandidaten: strahlender Kern / Stern | 13 |
+| Kandidaten: gebundene Orbitalstruktur / Planet | 95 |
+| Größere Strukturkomplexe | 23 |
+| Phasenfreisetzungs-/Supernova-Kandidaten | 19 |
+
+Alle acht automatisierten Validierungsgates bestehen. Der Lauf belegt damit, dass die Software die geforderten SubQG-internen Prozesse deterministisch, endlich und ohne externe Objektvorlagen ausführen kann. Er belegt noch nicht, dass die Kandidaten mit realen Sternen, Planeten, Galaxien oder Supernovae identisch sind; dafür sind dimensionsbehaftete Kalibrierung, Auflösungsstudien und unabhängige Beobachtungsvergleiche erforderlich.
+
+---
+
+# 8. Formale Verifikation: MathResearchEngine (`.mreformula`) & Lean 4
 
 Ein entscheidender wissenschaftlicher Fortschritt in FPV11 ist die vollständige formale und maschinelle Absicherung der mathematischen Gleichungen gegen logische Zirkelschlüsse und numerische Artefakte.
 
-## 7.1 Das dreistufige Verifikationssystem
+## 8.1 Das dreistufige Verifikationssystem
 
 ```mermaid
 flowchart TD
     A["1. Symbolische Algebra\n(Menschliche Herleitung)"] --> B["2. MathResearchEngine\n(math_research_v03.exe formula-check)"]
     B --> C["3. Formale Beweisassistenz\n(Lean 4 v4.34.1 Theoreme)"]
-    C --> D["Wissenschaftlich gesicherter\nBeweisstatus"]
+    C --> D["Maschinengeprüfter\nformaler Status"]
 ```
 
 1. **Symbolische Algebra:** Herleitung über Körper- und Ringaxiome (Distributivität, binomische Sätze, Ehrenfest-Theorem).
 2. **Numerische Raster- und Zufallsprüfung:** `math_research_v03.exe` wertet jede Formel an 121 festen Gitterpunkten und 40 deterministischen Zufallspunkten (`seed: 42`) unabhängig auf linker und rechter Seite aus.
-3. **Axiomatische Lean-4-Verifikation:** Jedes Theorem wird in `SubQG_Formal_Verification_2026-11-11.lean` formalisiert und durch Mathlib-Taktiken (`ring`, `field_simp`, `norm_num`) bewiesen.
+3. **Axiomatische Lean-4-Verifikation:** Die Theoreme sind auf `SubQGDerivation.lean`, `SubQGUniverseEvolution.lean` und `SubQG_Formal_Verification_2026-11-11.lean` verteilt und werden durch Lean und Mathlib kernelgeprüft.
 
-## 7.2 Übersicht der kanonischen Formeln 01–19 & Lean-Theoreme
+## 8.2 Übersicht der kanonischen Formeln 01–20 & Lean-Theoreme
 
 | Nr. | Formel im `.mreformula`-Format | Mathematische & Physikalische Bedeutung | MRE-Rasterprüfung | Lean-4-Theorem & Taktik |
 |---:|---|---|:---:|---|
@@ -247,61 +307,70 @@ flowchart TD
 | **19** | `(x+y)^2 = x^2+y^2` | **Gegenbeispiel:** Unentkoppelte Multiversum-Kreuzkraft | **Widerlegt** bei Punkt 1 ($x=-10, y=-10$) | `formula19_cross_force_counterexample` (`norm_num`) |
 | **20** | `(x+y)^2 - 2*(x^2+y^2) + (x-y)^2 = 0` | Transientes Tunnel-Kopplungs-Theorem (Orthogonalitätsstörung $\Delta\theta \to 0$) | 161 Punkte | `formula20_transient_tunneling_invariance` (`ring`) |
 
-## 7.3 Zusätzliche Formeln und Gesamtaudit
-Über die kanonische Reihe 01–19 hinaus wurden 9 weitere historische und erweiterte Formeldateien geprüft:
+## 8.3 Zusätzliche Formeln und Gesamtaudit
+Der historische 28-Dateien-Audit umfasste die damalige kanonische Reihe 01–19 und 9 historische beziehungsweise erweiterte Dateien. Formel 20 wurde anschließend als neue kanonische Tunnel-Kopplungsinvarianz ergänzt und ist ebenfalls formal verifiziert. Zu den Zusatzkontrollen gehören:
 * `extra_binomial` (`(x+y)^2 = x^2 + 2xy + y^2`) – formal verifiziert.
 * `extra_graph_dispersion` (`(x+y)(x-y) = x^2 - y^2`) – formal verifiziert.
 * `extra_mond_crossover` (`x*(x/(x+y)) = x^2/(x+y)`) – formal verifiziert.
 * 6 wortgleiche historische Dubletten – vollständig durch die kanonischen Theoreme abgedeckt.
 
-## 7.4 Lean-4-Kompilierungsergebnis
-Die formale Verifikationsdatei `SubQG_Formal_Verification_2026-11-11.lean` wurde mit Lean 4.34.1 kompiliert:
+## 8.4 Lean-4-Kompilierungsergebnis
+Die drei formalen Verifikationsdateien wurden gemeinsam mit Lean 4.34.1 kompiliert:
 * **Exitcode:** 0
 * **Warnungen:** 0
 * **Fehler:** 0
 * **Verbotene Beweisabkürzungen (`sorry`, `admit`, `sorryAx`):** 0 (keine verwendet)
+* **Kernelgeprüfte Theoreme:** 75 insgesamt, davon 18 Invarianten der Universumsentwicklung
 * **Geprüfte Axiome:** Ausschließlich die Standardaxiome der intuitionistischen/klassischen Logik (`propext`, `Classical.choice`, `Quot.sound`).
 
 Zusätzlich absolvierte die MathResearchEngine ihre vollständige interne **18-Punkte-Selbstprüfung (`selftest`) mit 18 von 18 bestandenen Tests** (darunter semantische Lean-Extraktion, Typkompatibilität, Erkennung ungültiger Formeln und Ablehnung unbewiesener Kandidaten).
 
 ---
 
-# 8. Reproduzierbarkeit und Verifikationsumfang
+# 9. Reproduzierbarkeit und Verifikationsumfang
 
 | Verifikationsschritt | Auszuführender Befehl | Befund in FPV11 |
 |---|---|---|
-| **Gesamte Node.js Testsuite** | `npm test` (im Ordner `developer/`) | **272 von 272 Tests bestanden** (Laufzeit: 18,8 s) |
-| **SubQG Apfel-Experiment Suite** | `node developer/src/index.mjs --apple` | **Alle 6 Gates bestanden**, $\eta_{\max} = 0{,}0255\,\%$, $R^2 = 0{,}999994$ |
+| **Gesamte Node.js Testsuite** | `npm test` | **360 von 360 Tests bestanden** |
+| **SubQG Apfel-Experiment Suite** | `node src/index.mjs --apple` | **Alle 6 Gates bestanden**, $\eta_{\max} = 0{,}0255\,\%$, $R^2 = 0{,}999994$ |
+| **Universumsentwicklung (2 Mrd. Anzeigejahre)** | `npm run validation:universe-2gyr` | **8 von 8 Gates bestanden**, einschließlich Determinismus, Endlichkeit, Kausalität und unbekannter Strukturen |
 | **MRE Formel-Check (28 Dateien)** | `math_research_v03.exe formula-check <datei>` | **23 Identitäten überstanden, 5 Gegenbeispiele erkannt** |
-| **Formale Lean-4-Kompilierung** | `lake env lean SubQG_Formal_Verification_2026-11-11.lean` | **Exitcode 0, 0 Fehler, 0 Warnungen, keine sorry** |
+| **Formale Lean-4-Kompilierung** | `npm run verify:lean` | **75 Theoreme in 3 Dateien; Exitcode 0, 0 Fehler, 0 Warnungen, keine Beweislückenmarker** |
 | **MRE Engine Selbstprüfung** | `math_research_v03.exe selftest <temp-dir>` | **18 von 18 internen Systemtests bestanden** |
-| **Cinematic 3D Cosmos Viewer** | `developer/viewer/subqg_cinematic_cosmos.html` | Interaktiver Asteroidenflug & Quantenvakuum |
-| **Dual Multiverse 3D Viewer** | `developer/viewer/subqg_dual_multiverse.html` | Interaktive überlappende Multiplex-Universen |
+| **Bestehender Cinematic 3D Cosmos Viewer** | `viewer/subqg_cinematic_cosmos.html` | Interaktiver Asteroidenflug & Quantenvakuum |
+| **Bestehender Dual Multiverse 3D Viewer** | `viewer/subqg_dual_multiverse.html` | Interaktive überlappende Multiplex-Universen |
 
-GitHub-Repository: `https://github.com/kruemmel-python/Subquantum_Graphity-.git` (Synchronisiert bis Commit `110d88a`).
+GitHub-Repository: `https://github.com/kruemmel-python/sub-quanten-gravitation` (öffentlicher Stand auf Branch `main`).
 
 ---
 
-# 9. Schlussfolgerung und wissenschaftliche Einordnung
+# 10. Schlussfolgerung und wissenschaftliche Einordnung
 
 Das erweiterte FPV11-Whitepaper schließt die Lücke zwischen der theoretischen Netzwerk-Nukleation und der mathematisch-mechanischen Realität:
 
 1. **Herleitung statt Postulat:** Das Äquivalenzprinzip ($m_{\mathrm{inert}} = m_{\mathrm{grav}}$) und das Phänomen des Gewichts sind in SubQG keine getrennten Axiome. Sie folgen zwingend aus dem Verhältnis der mechanischen Kraftaufteilung auf $N_\Psi$ Quanten versus der universellen geometrischen Kopplung jedes Quants an die Kantenlängenverkürzung $L_e = L_0 e^{x_e}$.
 2. **Das Vakuum ist ein aktiver Raumzeit-Träger:** Freier Flug ohne Reibung existiert, weil das kondensierte Quantenvakuum ein verlustfreier, suprafluider Grundzustand ist.
 3. **Multiplex-Geometrie erklärt überlappende Welten:** Mehrere unabhängige Universen können denselben fundamentalen Satz an Subquanten-Knoten teilen, ohne kollidierende Kräfte oder Lichtsignale auszutauschen, sofern ihre Kantennetzwerke über orthogonale Phasenräume entkoppelt sind.
-4. **Maschinell geprüfte Exaktheit:** Durch die Verbindung von reproduzierbarer C++-Engine-Berechnung (`math_research_v03.exe`) und formaler Beweisprüfung in Lean 4 ist die mathematische Konsistenz der SubQG-Gleichungen auf höchstem formalem Standard abgesichert.
+4. **Universen können als aktualisierte Netzwerksektoren untersucht werden:** Die neue Engine erzeugt relationale Zeit, persistente Strukturen und vorsichtig klassifizierte Kandidaten ausschließlich aus der SubQG-Netzwerkdynamik; unbekannte Ergebnisse bleiben ausdrücklich erhalten.
+5. **Maschinell geprüfte interne Konsistenz:** Durch reproduzierbare Engine-Berechnung und 75 Lean-Theoreme sind die formalisierten algebraischen Aussagen und Softwareinvarianten maschinengeprüft. Lean beweist dabei die angegebenen Sätze aus ihren Voraussetzungen, nicht die empirische Wahrheit sämtlicher physikalischer Voraussetzungen.
 
-Damit stellt SubQG FPV11 eine in sich geschlossene, mathematisch rigorose, numerisch verifizierte und formal bewiesene Modellgrundlage für die emergente Quantengravitation dar.
+Damit liegt eine reproduzierbare und formal abgesicherte Forschungsplattform für emergente Quantengravitation und Universumsbildung vor. Ob die emergenten Kandidaten reale kosmische Systeme quantitativ beschreiben, muss durch weitere SubQG-interne Ableitungen, Skalierungsstudien und unabhängige empirische Tests entschieden werden.
 
 ---
 
 # Quellen innerhalb des Forschungsarchivs
 
-- `subqg_apple_experiment.mjs`: Kernmodul der Objektgravitation, Trägheitskalibrierung und Haltekraft.
+- `src/modules/subqg_apple_experiment.mjs`: Kernmodul der Objektgravitation, Trägheitskalibrierung und Haltekraft.
 - `SUBQG_FORMELANALYSEBERICHT_ERWEITERT_2026-11-11.md`: Vollständiger 425-Zeilen-Analysebericht der 28 Formeldateien mit mathematischen Herleitungen und Ausführungsprotokollen.
-- `SubQG_Formal_Verification_2026-11-11.lean`: Vollständige Lean-4-Beweisdatei für Theoreme 01–19 und Zusatzformeln ohne `sorry`.
-- `developer/mre_formulas/`: 19 kanonische `.mreformula`-Dateien (01–19) und Zusatzdateien.
-- `subqg_genesis.mjs`, `run_genesis_experiment.mjs`: Zustandsensemble, Graphbildung, Felddynamik und drei Genesis-Messverfahren.
-- `subqg_cinematic_cosmos.html`: 3D-Simulation des Asteroidenflugs und des suprafluiden Vakuums.
-- `subqg_dual_multiverse.html`: 3D-Simulation der orthogonal überlappenden Multiversen.
-- `tests/apple_experiment.test.mjs`, `tests/*.test.mjs`: Vollständige Testsuite (272 Tests).
+- `docs/SubQG_Formal_Verification_2026-11-11.lean`: Lean-4-Beweisdatei für die nummerierten Formeln und Zusatzformeln ohne `sorry`.
+- `formal/SubQGDerivation.lean`: Formale Ableitungen des SubQG-Kerns.
+- `formal/SubQGUniverseEvolution.lean`: 18 formale Invarianten der emergenten Universumsentwicklung.
+- `docs/SUBQG_UNIVERSE_LEAN_BERICHT.md`, `docs/LEAN_VERIFIKATIONSBERICHT.md`: Vollständige Lean-Prüfberichte.
+- `mre_formulas/`: Kanonische `.mreformula`-Dateien und Zusatzdateien.
+- `src/modules/subqg_genesis.mjs`: Zustandsensemble, Graphbildung, Felddynamik und Genesis-Messverfahren.
+- `src/modules/subqg_universe_evolution.mjs`: SubQG-interne Universumsentwicklung, relationale Uhr und neutraler Strukturkatalog.
+- `validation/scripts/subqg_universe_evolution_validation.mjs`: Reproduzierbarer kanonischer Lauf mit acht Validierungsgates.
+- `docs/SUBQG_UNIVERSE_EVOLUTION.md`: Architektur, Messgrößen, Interpretationsgrenzen und Integrationshinweise.
+- `viewer/subqg_cinematic_cosmos.html`: 3D-Simulation des Asteroidenflugs und des suprafluiden Vakuums.
+- `viewer/subqg_dual_multiverse.html`: 3D-Simulation der orthogonal überlappenden Multiversen.
+- `tests/apple_experiment.test.mjs`, `tests/*.test.mjs`: Vollständige Testsuite (360 Tests).
