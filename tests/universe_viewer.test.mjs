@@ -38,7 +38,12 @@ test('viewer supports free flight, target selection and responsive presentation'
   ]);
   for (const control of ['KeyW', 'KeyS', 'KeyA', 'KeyD', 'KeyQ', 'KeyE']) assert.match(client, new RegExp(control));
   assert.match(client, /requestPointerLock/);
+  assert.match(client, /function requestFlightPointerLock/);
+  assert.match(client, /direkte Zielklicks bleiben aktiv/);
   assert.match(client, /state\.autopilot/);
+  assert.match(client, /function pickTargetAt/);
+  assert.match(client, /crosshair \? innerWidth \/ 2 : event\.clientX/);
+  assert.match(client, /Ziel erfasst:/);
   assert.match(css, /@media \(max-width: 760px\)/);
 });
 

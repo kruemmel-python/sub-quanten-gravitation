@@ -166,6 +166,8 @@ Bedienung:
 - `W`, `A`, `S`, `D` für Vorwärts-, Rückwärts- und Seitenflug;
 - `Q` und `E` für Ab- und Aufstieg, Umschalt für den Boost;
 - Mausbewegung nach Aktivierung der Flugsteuerung für die Blickrichtung;
+- Linksklick auf einen Markierungsring im normalen Modus oder Linksklick auf
+  das Ziel unter dem Fadenkreuz im Flugmodus zur Zielerfassung;
 - Zeitleiste, Wiedergabe und Simulationsgeschwindigkeit für 0 bis zwei
   Milliarden Anzeigejahre;
 - Anklicken oder Katalogauswahl für Rohmesswerte und konkurrierende

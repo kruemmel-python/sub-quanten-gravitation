@@ -27,6 +27,7 @@ const state = {
   objectTargets: [],
   complexTargets: [],
   hitTargets: [],
+  hovered: null,
   selected: null,
   requestId: 0,
   busy: true,
@@ -246,6 +247,17 @@ function selectTarget(target) {
   updateSelectionPanel();
 }
 
+function pickTargetAt(screenX, screenY, { crosshair = false } = {}) {
+  const tolerance = crosshair ? 58 : 24;
+  return state.hitTargets
+    .map(hit => ({
+      ...hit,
+      distance: Math.hypot(hit.x - screenX, hit.y - screenY)
+    }))
+    .filter(hit => hit.distance <= Math.max(tolerance, hit.radius + 8))
+    .sort((a, b) => a.distance - b.distance || a.depth - b.depth)[0] ?? null;
+}
+
 function cameraBasis() {
   const cosPitch = Math.cos(state.camera.pitch);
   const forward = {
@@ -355,7 +367,10 @@ function drawTargets(projected, time) {
     const radius = Math.max(5, Math.min(22, base + pulse * 3 + point.scale * 2));
     context.save();
     context.strokeStyle = typeColor(target.type, .35 + pulse * .3);
-    context.lineWidth = target === state.selected ? 1.8 : .8;
+    const emphasized = target === state.selected || target === state.hovered;
+    context.lineWidth = target === state.selected ? 1.8 : target === state.hovered ? 1.35 : .8;
+    if (emphasized) context.shadowColor = typeColor(target.type, .8);
+    if (emphasized) context.shadowBlur = 12;
     context.setLineDash(target.kind === 'complex' ? [3, 4] : []);
     context.beginPath();
     context.arc(point.x, point.y, radius, 0, Math.PI * 2);
@@ -475,6 +490,17 @@ function showToast(message) {
   state.toastTimer = setTimeout(() => dom.toast.classList.remove('visible'), 2200);
 }
 
+function requestFlightPointerLock() {
+  try {
+    const request = canvas.requestPointerLock();
+    if (request && typeof request.catch === 'function') {
+      request.catch(() => showToast('Der Browser blockiert den Flugmodus · direkte Zielklicks bleiben aktiv'));
+    }
+  } catch {
+    showToast('Der Browser blockiert den Flugmodus · direkte Zielklicks bleiben aktiv');
+  }
+}
+
 worker.addEventListener('message', event => {
   const message = event.data ?? {};
   if (message.type === 'snapshot') {
@@ -506,7 +532,7 @@ dom.begin.addEventListener('click', () => {
   dom.intro.classList.add('hidden');
   showToast('Genesis geladen · starte die Zeit oder fliege frei');
 });
-dom.enterFlight.addEventListener('click', () => canvas.requestPointerLock());
+dom.enterFlight.addEventListener('click', requestFlightPointerLock);
 dom.play.addEventListener('click', () => setPlaying(!state.playing));
 dom.reset.addEventListener('click', () => {
   setPlaying(false);
@@ -543,20 +569,30 @@ dom.nextTarget.addEventListener('click', () => {
 });
 
 canvas.addEventListener('click', event => {
-  if (document.pointerLockElement === canvas) return;
-  const target = state.hitTargets
-    .filter(hit => Math.hypot(hit.x - event.clientX, hit.y - event.clientY) <= hit.radius)
-    .sort((a, b) => a.depth - b.depth)[0];
-  if (target) selectTarget(target.target);
+  const crosshair = document.pointerLockElement === canvas;
+  const screenX = crosshair ? innerWidth / 2 : event.clientX;
+  const screenY = crosshair ? innerHeight / 2 : event.clientY;
+  const hit = pickTargetAt(screenX, screenY, { crosshair });
+  if (hit) {
+    selectTarget(hit.target);
+    showToast(`Ziel erfasst: ${targetTitle(hit.target)}`);
+  } else if (crosshair) {
+    showToast('Kein Ziel im Fadenkreuz · richte es auf einen Markierungsring');
+  }
 });
-canvas.addEventListener('dblclick', () => canvas.requestPointerLock());
+canvas.addEventListener('dblclick', requestFlightPointerLock);
 canvas.addEventListener('pointerdown', event => { if (document.pointerLockElement !== canvas) state.drag = { x: event.clientX, y: event.clientY }; });
 window.addEventListener('pointerup', () => { state.drag = null; });
 window.addEventListener('pointermove', event => {
   let movementX = event.movementX;
   let movementY = event.movementY;
   if (document.pointerLockElement !== canvas) {
-    if (!state.drag) return;
+    if (!state.drag) {
+      const hit = pickTargetAt(event.clientX, event.clientY);
+      state.hovered = hit?.target ?? null;
+      canvas.style.cursor = hit ? 'pointer' : 'crosshair';
+      return;
+    }
     movementX = event.clientX - state.drag.x;
     movementY = event.clientY - state.drag.y;
     state.drag = { x: event.clientX, y: event.clientY };
@@ -564,6 +600,10 @@ window.addEventListener('pointermove', event => {
   state.autopilot = null;
   state.camera.yaw += movementX * .0022;
   state.camera.pitch = Math.max(-1.48, Math.min(1.48, state.camera.pitch - movementY * .0022));
+});
+canvas.addEventListener('pointerleave', () => {
+  state.hovered = null;
+  canvas.style.cursor = 'crosshair';
 });
 canvas.addEventListener('wheel', event => {
   event.preventDefault();
@@ -586,7 +626,9 @@ window.addEventListener('keyup', event => state.keys.delete(event.code));
 window.addEventListener('blur', () => state.keys.clear());
 document.addEventListener('pointerlockchange', () => {
   const active = document.pointerLockElement === canvas;
+  state.hovered = null;
   dom.enterFlight.textContent = active ? 'Flugsteuerung aktiv · ESC zum Lösen' : '⌖ Flugsteuerung aktivieren';
+  if (active) showToast('Flugmodus: Linksklick erfasst das Ziel im Fadenkreuz');
 });
 window.addEventListener('resize', resize);
 

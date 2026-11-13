@@ -20,7 +20,9 @@ dokumentiert.
   Strukturen, Archiverhalt und die Trennung von Analyse und Dynamik;
 - interaktiver `SubQG Universe Explorer` mit Worker-basierter Live-Simulation,
   freiem 3D-Flug, Zeitnavigation, Zielautopilot, Objektanalyse und Filtern für
-  unbekannte Strukturen.
+  unbekannte Strukturen;
+- robuste Maus-Zielerfassung über Markierungsringe sowie Fadenkreuzauswahl im
+  Pointer-Lock-Flugmodus.
 
 ## 1.0.0 – 2026-11-13
 
