@@ -66,7 +66,8 @@ Im Verzeichnis `developer` ausführen:
 npm run verify:lean
 ```
 
-Der Lauf ist nur erfolgreich, wenn:
+Der Lauf prüft nun den bisherigen Kern, die 20-Formel-Suite und
+`SubQGUniverseEvolution.lean`. Er ist nur erfolgreich, wenn:
 
 - `lean.exe` mit Exitcode 0 endet,
 - keine Compilerfehler auftreten,

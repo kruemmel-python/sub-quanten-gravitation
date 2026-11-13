@@ -3,6 +3,21 @@
 Alle wesentlichen Änderungen dieses Projekts werden in dieser Datei
 dokumentiert.
 
+## Unveröffentlicht
+
+- additive `SubQGUniverseEvolution` ausschließlich auf Basis des kanonischen
+  SubQG-Phasennetzwerks;
+- append-only Kausalaktualisierung von einem relationalen Ereignis bis zu einem
+  emergenten Raumzeitsektor;
+- kalibrierter Langzeitlauf über zwei Milliarden Anzeigejahre;
+- dauerhaftes Rohdatenarchiv für unbekannte emergente Strukturen;
+- nachträgliche Stern-, Planeten-, Nebel-, Galaxie- und
+  Phasenfreisetzungs-Kandidatenanalyse ohne Rückwirkung auf die Dynamik;
+- reproduzierbare Acht-Gate-Universumsvalidierung mit maschinenlesbarem Ergebnis;
+- sieben neue Universumstests, insgesamt nun 360 bestandene JavaScript-Tests;
+- 18 Lean-Theoreme für kausale Monotonie, relationale Zeit, unbekannte
+  Strukturen, Archiverhalt und die Trennung von Analyse und Dynamik.
+
 ## 1.0.0 – 2026-11-13
 
 - erste öffentliche Veröffentlichung als **Sub Quanten Gravitation**;

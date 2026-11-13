@@ -244,6 +244,45 @@ export class SubQGMultiversePhaseEngine {
   constructor(options?: any);
 }
 
+export class SubQGUniverseEvolution {
+  constructor(options?: {
+    stateCount?: number;
+    seed?: number;
+    epochYears?: number;
+    microStepsPerEpoch?: number;
+    observationStride?: number;
+    damping?: number;
+    activationAmplitude?: number;
+    universeMode?: 'CONTINUUM_3D' | 'CRITICAL_FRACTAL';
+    genesisOptions?: Record<string, any>;
+  });
+  readonly genesis: SubQGGenesisEngine;
+  ageYears: number;
+  epoch: number;
+  relationalClock: number;
+  stepEpoch(): Record<string, any> | null;
+  evolveToAge(targetAgeYears: number, options?: {
+    onObservation?: ((observation: Record<string, any>, universe: SubQGUniverseEvolution) => void) | null;
+  }): Record<string, any>;
+  objectCatalog(options?: { includeTransient?: boolean }): Array<Record<string, any>>;
+  structureCatalog(options?: { includeUnresolved?: boolean }): Array<Record<string, any>>;
+  analyzeEmergentStructure(id: string): Record<string, any>;
+  snapshot(options?: { includeGraph?: boolean; recentEventLimit?: number }): Record<string, any>;
+}
+
+export function evolveCanonicalSubQGUniverse(options?: {
+  targetAgeYears?: number;
+  stateCount?: number;
+  seed?: number;
+  epochYears?: number;
+  microStepsPerEpoch?: number;
+  observationStride?: number;
+  damping?: number;
+  activationAmplitude?: number;
+  universeMode?: 'CONTINUUM_3D' | 'CRITICAL_FRACTAL';
+  genesisOptions?: Record<string, any>;
+}): Record<string, any>;
+
 export class SubQGGraphCoupledEngine {
   constructor(options?: any);
 }

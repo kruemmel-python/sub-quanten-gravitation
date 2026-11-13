@@ -108,9 +108,16 @@ int main() {
 - `docs/`, `viewer/`, `media/` – ergänzende Dokumentation und Visualisierung;
 - `game_physic_engine/` – kanonische JavaScript-Referenzimplementierung.
 
-Der vollständige Lauf mit 57 Lean-Theoremen, allen 20 nummerierten Formeln,
+Der vollständige Lauf mit 75 Lean-Theoremen, allen 20 nummerierten Formeln,
 Toolchain-Angaben, Axiom-Basis und Reproduktionsanleitung ist im
 [`Lean-Verifikationsbericht`](docs/LEAN_VERIFIKATIONSBERICHT.md) dokumentiert.
+
+Die additive [`SubQG-Universumsentwicklung`](docs/SUBQG_UNIVERSE_EVOLUTION.md)
+lässt aus einem einzelnen relationalen Ereignis kausales Volumen und
+hierarchische Strukturen entstehen. Unbekannte Objekte bleiben erhalten und
+können später erneut als mögliche Stern-, Planeten-, Nebel- oder
+Galaxiesignaturen analysiert werden, ohne die zugrunde liegende Dynamik zu
+verändern.
 
 ## Wissenschaftliche und technische Grenzen
 

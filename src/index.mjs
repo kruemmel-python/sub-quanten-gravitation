@@ -11,7 +11,7 @@
  * - Gravitational Dynamics: Non-linear graph conductivity yielding Newton-to-MOND crossover
  *
  * @version 1.0.0
- * @license MIT
+ * @license GPL-3.0-only
  */
 
 // Core Foundation Worlds
@@ -45,6 +45,10 @@ export {
 } from './modules/subqg_weak_field_metric.mjs';
 export { SubQGGenesisEngine, executeMasterGenesisExperiment } from './modules/subqg_genesis.mjs';
 export { SubQGMultiversePhaseEngine } from './modules/subqg_multiverse_phases.mjs';
+export {
+  SubQGUniverseEvolution,
+  evolveCanonicalSubQGUniverse
+} from './modules/subqg_universe_evolution.mjs';
 export { SubQGGraphCoupledEngine } from './modules/subqg_graph_coupled_gravity.mjs';
 export { SubQGEmergentGravity } from './modules/subqg_emergent_gravity_darkmatter.mjs';
 export { SubQGFirstPrinciplesEngine } from './modules/subqg_first_principles_gravity.mjs';

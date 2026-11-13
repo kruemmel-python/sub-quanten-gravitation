@@ -1,15 +1,16 @@
 # Vollständiger Lean-Verifikationsbericht
 
-**Projekt:** Sub Quanten Gravitation  
-**Berichtsdatum:** 13. November 2026  
-**Geprüfter Quellstand:** `a5702b94af2ca37fbb27ac628f3c1e0d21525844`  
+**Projekt:** Sub Quanten Gravitation<br>
+**Berichtsdatum:** 13. November 2026<br>
+**Geprüfter Quellstand:** über die SHA-256-Werte der Lean-Dateien festgelegt<br>
 **Ergebnis:** **BESTANDEN**
 
 ## 1. Zweck und Prüfumfang
 
 Dieser Bericht dokumentiert die formale Prüfung der im Repository enthaltenen
-Lean-Quellen. Geprüft wurden sowohl die zentrale SubQG-Formalisierung als auch
-das vollständige Paket der 20 nummerierten Formeln und drei ergänzenden Sätze.
+Lean-Quellen. Geprüft wurden die zentrale SubQG-Formalisierung, die additive
+Universumsentwicklung sowie das vollständige Paket der 20 nummerierten Formeln
+und drei ergänzenden Sätze.
 
 Die Prüfung beantwortet drei getrennte Fragen:
 
@@ -41,16 +42,18 @@ Dateien wurden auf Laufwerk H: angelegt und nach der Prüfung entfernt.
 | Datei | Theoreme | Definitionen | Strukturen | SHA-256 |
 |---|---:|---:|---:|---|
 | `formal/SubQGDerivation.lean` | 34 | 29 | 3 | `690D5C19EC443047724E8283FBAFFDF94914114D90AB751182E685CC07A04377` |
+| `formal/SubQGUniverseEvolution.lean` | 18 | 6 | 5 | `9604A284E4CA559507AB4EA2B7BFF0AAF0DEF51DC8A649FC77D45846A057403E` |
 | `docs/SubQG_Formal_Verification_2026-11-11.lean` | 23 | 0 | 0 | `AFAC549278B84251DDDDD7D912E3B2E5C675BAE8C15ED0924B47D771B2FEF3D8` |
-| **Gesamt** | **57** | **29** | **3** | — |
+| **Gesamt** | **75** | **35** | **8** | — |
 
-Beide Dateien wurden vom Lean-Compiler mit Exitcode `0` abgeschlossen.
+Alle drei Dateien wurden vom Lean-Compiler mit Exitcode `0` abgeschlossen.
 
 ## 4. Ergebnisübersicht
 
 | Prüfung | Ergebnis |
 |---|---|
 | Zentraler formaler SubQG-Kern | BESTANDEN |
+| Formale Invarianten der Universumsentwicklung | BESTANDEN |
 | 20 nummerierte Formeln | BESTANDEN |
 | 3 ergänzende Formeln | BESTANDEN |
 | Suche nach `sorry` | 0 Treffer |
@@ -186,6 +189,13 @@ Zugehörige Sätze sind `static_dust_time_perturbation`,
 
 ## 7. Vertrauensbasis und Axiome
 
+Die neue Universumsdatei beweist zusätzlich einen raumlosen Anfang, monotone
+kausale Aktualisierung, strikt wachsende relationale Zeit bei neuen Relationen,
+die Zwei-Milliarden-Jahre-Kalibrierungsarithmetik, die Zulässigkeit unbekannter
+Strukturen und die vollständige Trennung nachträglicher Klassifikation von der
+SubQG-Dynamik. Die ausführliche Auswertung steht im
+[`Lean-Bericht zur Universumsentwicklung`](SUBQG_UNIVERSE_LEAN_BERICHT.md).
+
 Die `#print axioms`-Ausgabe meldet für die zentralen Sätze ausschließlich:
 
 - `propext` – propositionale Extensionalität;
@@ -238,7 +248,7 @@ Für den dokumentierten Lauf lieferte die Suche keine Treffer.
 
 Der bestandene Lauf beweist:
 
-- Die 57 Theoreme sind für Lean 4 typkorrekt und kernelgeprüft.
+- Die 75 Theoreme sind für Lean 4 typkorrekt und kernelgeprüft.
 - Die angegebenen Schlussfolgerungen folgen aus den formalisierten Prämissen.
 - Die Beweise enthalten keine zugelassenen Lückenmarker.
 - Die 20 Formelprüfungen und drei Zusatzprüfungen sind vollständig
@@ -262,9 +272,9 @@ aber unterschiedliche Ebenen.
 ## 10. Schlussfolgerung
 
 Die vollständige im Repository vorhandene Lean-Suite ist für den angegebenen
-Quellstand **bestanden**. Beide Lean-Dateien kompilieren ohne Fehler. Insgesamt
-wurden 57 Theoreme geprüft, darunter alle 20 nummerierten SubQG-Formeln und drei
-ergänzende Formeln. Es wurden keine Vorkommen von `sorry`, `admit` oder
-`sorryAx` gefunden. Die ausgegebene Axiom-Basis beschränkt sich auf die
-übliche Lean-/Mathlib-Vertrauensgrundlage.
-
+Quellstand **bestanden**. Alle drei Lean-Dateien kompilieren ohne Fehler.
+Insgesamt wurden 75 Theoreme geprüft, darunter alle 20 nummerierten
+SubQG-Formeln, drei ergänzende Formeln und 18 Sätze zur Universumsentwicklung.
+Es wurden keine Vorkommen von `sorry`, `admit` oder `sorryAx` gefunden. Die
+ausgegebene Axiom-Basis beschränkt sich auf die übliche
+Lean-/Mathlib-Vertrauensgrundlage.

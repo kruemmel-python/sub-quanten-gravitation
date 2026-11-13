@@ -32,19 +32,34 @@ if ($missingRequiredRoots.Count -gt 0) {
 
 $existingRoots = @($leanRoots | Where-Object { Test-Path -LiteralPath $_ })
 $env:LEAN_PATH = $existingRoots -join ';'
-$formalFile = Join-Path $PSScriptRoot 'SubQGDerivation.lean'
+$formalFiles = @(
+  (Join-Path $PSScriptRoot 'SubQGDerivation.lean'),
+  (Join-Path $PSScriptRoot 'SubQGUniverseEvolution.lean'),
+  (Join-Path (Split-Path $PSScriptRoot -Parent) 'docs\SubQG_Formal_Verification_2026-11-11.lean')
+)
 
-$compilerOutput = & $leanExe $formalFile 2>&1
-$exitCode = $LASTEXITCODE
-$compilerOutput | ForEach-Object { Write-Output $_ }
+foreach ($formalFile in $formalFiles) {
+  if (-not (Test-Path -LiteralPath $formalFile)) {
+    throw "Lean source not found: $formalFile"
+  }
+  $sourceText = Get-Content -LiteralPath $formalFile -Raw
+  if ($sourceText -match '(?i)\b(sorry|admit|sorryAx)\b') {
+    throw "Forbidden proof shortcut found in source: $formalFile"
+  }
 
-if ($exitCode -ne 0) {
-  throw "Lean verification failed with exit code $exitCode"
+  Write-Output "Verifying: $formalFile"
+  $compilerOutput = & $leanExe $formalFile 2>&1
+  $exitCode = $LASTEXITCODE
+  $compilerOutput | ForEach-Object { Write-Output $_ }
+
+  if ($exitCode -ne 0) {
+    throw "Lean verification failed for $formalFile with exit code $exitCode"
+  }
+
+  $joinedOutput = $compilerOutput -join "`n"
+  if ($joinedOutput -match 'sorryAx|declaration uses.*sorry|declaration uses.*admit') {
+    throw "Lean reported a forbidden proof shortcut in $formalFile"
+  }
 }
 
-$joinedOutput = $compilerOutput -join "`n"
-if ($joinedOutput -match 'sorryAx|declaration uses.*sorry|declaration uses.*admit') {
-  throw 'Lean reported a forbidden proof shortcut (sorry/admit/sorryAx)'
-}
-
-Write-Output 'SubQG formal verification: PASSED'
+Write-Output "SubQG formal verification: PASSED ($($formalFiles.Count) files)"
