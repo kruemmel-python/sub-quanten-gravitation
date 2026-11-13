@@ -108,6 +108,10 @@ int main() {
 - `docs/`, `viewer/`, `media/` – ergänzende Dokumentation und Visualisierung;
 - `game_physic_engine/` – kanonische JavaScript-Referenzimplementierung.
 
+Der vollständige Lauf mit 57 Lean-Theoremen, allen 20 nummerierten Formeln,
+Toolchain-Angaben, Axiom-Basis und Reproduktionsanleitung ist im
+[`Lean-Verifikationsbericht`](docs/LEAN_VERIFIKATIONSBERICHT.md) dokumentiert.
+
 ## Wissenschaftliche und technische Grenzen
 
 - Die native Game-Physik ist zweidimensional.
