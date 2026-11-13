@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Wenn Sie Sub Quanten Gravitation verwenden, zitieren Sie bitte dieses Software-Release."
+title: "Sub Quanten Gravitation"
+type: software
+version: 1.0.0
+date-released: 2026-11-13
+authors:
+  - name: "Sub Quanten Gravitation Research Project"
+repository-code: "https://github.com/kruemmel-python/sub-quanten-gravitation"
+url: "https://github.com/kruemmel-python/sub-quanten-gravitation/releases/tag/v1.0.0"
+license: GPL-3.0-only
+keywords:
+  - quantum gravity
+  - emergent spacetime
+  - relational physics
+  - C++
+  - game physics
+  - SubQG

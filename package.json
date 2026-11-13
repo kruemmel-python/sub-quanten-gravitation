@@ -1,0 +1,56 @@
+{
+  "name": "sub-quanten-gravitation",
+  "version": "1.0.0",
+  "description": "Sub Quanten Gravitation: C++17 physics library and reproducible relational quantum-gravity research runtime",
+  "type": "module",
+  "main": "src/index.mjs",
+  "types": "src/index.d.ts",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "demo": "node src/index.mjs --demo",
+    "audit": "node src/index.mjs --audit",
+    "test": "node --test tests/*.test.mjs",
+    "verify:lean": "powershell -ExecutionPolicy Bypass -File formal/verify.ps1",
+    "validation:fetch:sparc": "powershell -ExecutionPolicy Bypass -File validation/scripts/fetch-sparc.ps1",
+    "validation:fetch:little-things": "powershell -ExecutionPolicy Bypass -File validation/scripts/fetch-little-things.ps1",
+    "validation:sparc": "node validation/scripts/sparc_rotation_validation.mjs",
+    "validation:little-things": "node validation/scripts/little_things_validation.mjs",
+    "validation:lensing": "node validation/scripts/lensing_ppn_validation.mjs",
+    "validation:spin2-bridge": "node validation/scripts/spin2_bridge_audit.mjs",
+    "validation:solar-system": "node validation/scripts/solar_system_perihelion_validation.mjs",
+    "validation:local-gravity": "node validation/scripts/local_gravity_validation.mjs",
+    "validation:binary-pulsar": "node validation/scripts/binary_pulsar_validation.mjs",
+    "validation:gravitational-waves": "node validation/scripts/gravitational_wave_validation.mjs",
+    "validation:simplex-tensor-bridge": "node validation/scripts/simplex_tensor_bridge.mjs",
+    "validation:collective-spin2-hessian": "node validation/scripts/collective_spin2_hessian.mjs",
+    "validation:cosmology": "node validation/scripts/cosmology_validation.mjs",
+    "validation:background-bao": "node validation/scripts/subqg_background_bao_validation.mjs",
+    "validation:fetch:planck-plik-lite": "powershell -ExecutionPolicy Bypass -File validation/scripts/fetch-planck-plik-lite.ps1",
+    "validation:cmb-spectrum": "powershell -ExecutionPolicy Bypass -File validation/scripts/run-cmb-spectrum.ps1",
+    "validation:structure-growth": "node validation/scripts/subqg_structure_growth_validation.mjs",
+    "validation:empirical-gates": "node validation/scripts/empirical_gravity_gate_validation.mjs"
+  },
+  "keywords": [
+    "quantum-gravity",
+    "subqg",
+    "emergent-spacetime",
+    "relational-quantum-mechanics",
+    "mond",
+    "page-wootters",
+    "causal-sets",
+    "first-principles"
+  ],
+  "author": "Sub Quanten Gravitation Research Project",
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/kruemmel-python/sub-quanten-gravitation#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kruemmel-python/sub-quanten-gravitation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kruemmel-python/sub-quanten-gravitation/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
