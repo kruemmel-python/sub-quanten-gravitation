@@ -119,6 +119,25 @@ können später erneut als mögliche Stern-, Planeten-, Nebel- oder
 Galaxiesignaturen analysiert werden, ohne die zugrunde liegende Dynamik zu
 verändern.
 
+### Interaktiver Universe Explorer
+
+Der Webviewer berechnet die Entwicklung in einem separaten Worker direkt mit
+`SubQGUniverseEvolution`. Er ermöglicht freien Flug, Zeitsteuerung von der
+Genesis bis zwei Milliarden Anzeigejahre, anwählbare Strukturen,
+Mehrhypothesen-Analyse und einen dauerhaften Filter für unbekannte Objekte.
+
+**Öffentlicher Viewer:**
+[SubQG Universe Explorer starten](https://kruemmel-python.github.io/sub-quanten-gravitation/)
+
+```powershell
+npm run viewer:universe
+```
+
+Danach im Browser
+`http://127.0.0.1:4173/viewer/subqg_universe_explorer.html` öffnen. Die
+dargestellten 3D-Koordinaten sind ausdrücklich eine visuelle Einbettung der
+relationalen Messwerte und kein zusätzlicher physikalischer Raum.
+
 ## Wissenschaftliche und technische Grenzen
 
 - Die native Game-Physik ist zweidimensional.

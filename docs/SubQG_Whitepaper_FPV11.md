@@ -16,7 +16,7 @@ Subquantum Graphity (SubQG) untersucht, ob sich Raumzeit, interne Uhren, Träghe
 3. **Orthogonale überlappende Multiversen am selben Ort:** Auf einem gemeinsamen Knotenensemble $\mathcal{V}$ wird gezeigt, dass zwei vollständige 3D-Universen am exakt selben Ort zur selben Zeit existieren können, ohne sich gravitativ oder elektromagnetisch zu beeinflussen, sofern ihre Kantennetzwerke über orthogonale Phasenräume $\langle A | B \rangle = 0$ entkoppelt sind ($E_A \cap E_B = \emptyset$).
 4. **Emergente Universumsentwicklung ohne importierte Astrophysik:** `SubQGUniverseEvolution` startet mit einem relationalen Ereignis ohne räumliche Kante und aktualisiert Knoten, Kanten, Simplexe und interne Zeit ausschließlich über die vorhandene SubQG-Phasendynamik und Energie–Metrik-Rückkopplung. Ein kanonischer Lauf erreicht 2.000 Epochen beziehungsweise zwei Milliarden explizit kalibrierte Anzeigejahre. Er archiviert auch Strukturen, die zunächst unbekannt bleiben. Stern-, Planeten-, Nebel-, Galaxie- und Supernovabezeichnungen sind nachträgliche Signaturhypothesen und keine vorprogrammierten Körperklassen.
 5. **Erweiterte Formelanalyse & formale Lean-4-Verifikation:** Die Lean-Suite umfasst nun drei Dateien mit **75 kernelgeprüften Theoremen**: 34 Sätze zum SubQG-Kern, 23 Formeltheoreme einschließlich aller 20 nummerierten Formeln und 18 Sätze zur Universumsentwicklung. Der gemeinsame Lauf mit **Lean 4.34.1** endet mit Exitcode 0, ohne Warnungen, Fehler oder Beweisabkürzungen wie `sorry`, `admit` oder `sorryAx`.
-6. **Software- & Testverifikation:** Die Gesamttestsuite umfasst **360 von 360 bestandene JavaScript-Tests**. Zusätzlich bestehen alle 8 internen Langzeitgates des Zwei-Milliarden-Jahre-Laufs. Bereits vorhandene Viewer bleiben Demonstratoren; eine frei begehbare WebView der neuen Universumsentwicklung wird erst auf diesem validierten Kern aufgebaut.
+6. **Software, Tests & interaktiver Webviewer:** Die Gesamttestsuite umfasst **364 von 364 bestandene JavaScript-Tests**. Zusätzlich bestehen alle 8 internen Langzeitgates des Zwei-Milliarden-Jahre-Laufs. Der `SubQG Universe Explorer` berechnet Live-Snapshots der unveränderten Engine in einem separaten Worker und ermöglicht freien Flug, Zeitnavigation, Zielanflug und die Untersuchung unbekannter Strukturen in einer ausdrücklich nichtphysikalischen visuellen 3D-Einbettung.
 
 **Schlüsselwörter:** SubQG; Genesis; emergente Raumzeit; Universumsentwicklung; unbekannte Strukturen; relationale Zeit; Äquivalenzprinzip; Kantenmetrik; MOND-Crossover; orthogonale Multiversen; Lean 4; formale Verifikation.
 
@@ -331,7 +331,7 @@ Zusätzlich absolvierte die MathResearchEngine ihre vollständige interne **18-P
 
 | Verifikationsschritt | Auszuführender Befehl | Befund in FPV11 |
 |---|---|---|
-| **Gesamte Node.js Testsuite** | `npm test` | **360 von 360 Tests bestanden** |
+| **Gesamte Node.js Testsuite** | `npm test` | **364 von 364 Tests bestanden** |
 | **SubQG Apfel-Experiment Suite** | `node src/index.mjs --apple` | **Alle 6 Gates bestanden**, $\eta_{\max} = 0{,}0255\,\%$, $R^2 = 0{,}999994$ |
 | **Universumsentwicklung (2 Mrd. Anzeigejahre)** | `npm run validation:universe-2gyr` | **8 von 8 Gates bestanden**, einschließlich Determinismus, Endlichkeit, Kausalität und unbekannter Strukturen |
 | **MRE Formel-Check (28 Dateien)** | `math_research_v03.exe formula-check <datei>` | **23 Identitäten überstanden, 5 Gegenbeispiele erkannt** |
@@ -339,6 +339,7 @@ Zusätzlich absolvierte die MathResearchEngine ihre vollständige interne **18-P
 | **MRE Engine Selbstprüfung** | `math_research_v03.exe selftest <temp-dir>` | **18 von 18 internen Systemtests bestanden** |
 | **Bestehender Cinematic 3D Cosmos Viewer** | `viewer/subqg_cinematic_cosmos.html` | Interaktiver Asteroidenflug & Quantenvakuum |
 | **Bestehender Dual Multiverse 3D Viewer** | `viewer/subqg_dual_multiverse.html` | Interaktive überlappende Multiplex-Universen |
+| **SubQG Universe Explorer** | `npm run viewer:universe` | Worker-basierter Live-Lauf, freier 3D-Flug, Zeitnavigation und rückwirkungsfreie Objektanalyse |
 
 GitHub-Repository: `https://github.com/kruemmel-python/sub-quanten-gravitation` (öffentlicher Stand auf Branch `main`).
 
@@ -371,6 +372,7 @@ Damit liegt eine reproduzierbare und formal abgesicherte Forschungsplattform fü
 - `src/modules/subqg_universe_evolution.mjs`: SubQG-interne Universumsentwicklung, relationale Uhr und neutraler Strukturkatalog.
 - `validation/scripts/subqg_universe_evolution_validation.mjs`: Reproduzierbarer kanonischer Lauf mit acht Validierungsgates.
 - `docs/SUBQG_UNIVERSE_EVOLUTION.md`: Architektur, Messgrößen, Interpretationsgrenzen und Integrationshinweise.
+- `viewer/subqg_universe_explorer.html`: Interaktiver Flug durch Live-Snapshots der SubQG-Universumsentwicklung.
 - `viewer/subqg_cinematic_cosmos.html`: 3D-Simulation des Asteroidenflugs und des suprafluiden Vakuums.
 - `viewer/subqg_dual_multiverse.html`: 3D-Simulation der orthogonal überlappenden Multiversen.
-- `tests/apple_experiment.test.mjs`, `tests/*.test.mjs`: Vollständige Testsuite (360 Tests).
+- `tests/apple_experiment.test.mjs`, `tests/*.test.mjs`: Vollständige Testsuite (364 Tests).

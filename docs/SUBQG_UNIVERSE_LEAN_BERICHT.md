@@ -155,7 +155,7 @@ Naturgesetz-Axiom ab.
 Die formalen Invarianten werden durch die JavaScript-Tests und den kanonischen
 Langzeitlauf ergänzt:
 
-- 360 von 360 Projekttests bestanden;
+- 364 von 364 Projekttests bestanden, einschließlich vier Viewer-Vertragstests;
 - 7 von 7 neue Universums-Unit-Tests bestanden;
 - 8 von 8 Langzeit-Validierungsgates bestanden;
 - 320 latente SubQG-Zustände, davon 311 im aktualisierten Hauptsektor;

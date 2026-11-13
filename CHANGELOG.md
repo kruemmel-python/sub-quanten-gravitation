@@ -14,9 +14,13 @@ dokumentiert.
 - nachträgliche Stern-, Planeten-, Nebel-, Galaxie- und
   Phasenfreisetzungs-Kandidatenanalyse ohne Rückwirkung auf die Dynamik;
 - reproduzierbare Acht-Gate-Universumsvalidierung mit maschinenlesbarem Ergebnis;
-- sieben neue Universumstests, insgesamt nun 360 bestandene JavaScript-Tests;
+- sieben neue Universumstests und vier Viewer-Vertragstests, insgesamt nun 364
+  bestandene JavaScript-Tests;
 - 18 Lean-Theoreme für kausale Monotonie, relationale Zeit, unbekannte
-  Strukturen, Archiverhalt und die Trennung von Analyse und Dynamik.
+  Strukturen, Archiverhalt und die Trennung von Analyse und Dynamik;
+- interaktiver `SubQG Universe Explorer` mit Worker-basierter Live-Simulation,
+  freiem 3D-Flug, Zeitnavigation, Zielautopilot, Objektanalyse und Filtern für
+  unbekannte Strukturen.
 
 ## 1.0.0 – 2026-11-13
 

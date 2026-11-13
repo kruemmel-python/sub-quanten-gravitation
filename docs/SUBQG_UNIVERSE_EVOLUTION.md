@@ -145,6 +145,40 @@ prüfen den raumlosen Anfangszustand, monotone Kausalaktualisierung,
 deterministische Wiederholung, den Zwei-Milliarden-Jahre-Lauf, den Erhalt
 unbekannter Strukturen, emergente Signaturen und numerisch endliche Zustände.
 
+## Interaktiver Webviewer
+
+Der `SubQG Universe Explorer` führt dieselbe Engine direkt im Browser in einem
+separaten Module-Worker aus. Dadurch bleiben Navigation und Darstellung auch
+während längerer Entwicklungsschritte bedienbar.
+
+Öffentliche Webversion:
+[SubQG Universe Explorer](https://kruemmel-python.github.io/sub-quanten-gravitation/)
+
+```powershell
+npm run viewer:universe
+```
+
+Aufruf:
+`http://127.0.0.1:4173/viewer/subqg_universe_explorer.html`
+
+Bedienung:
+
+- `W`, `A`, `S`, `D` für Vorwärts-, Rückwärts- und Seitenflug;
+- `Q` und `E` für Ab- und Aufstieg, Umschalt für den Boost;
+- Mausbewegung nach Aktivierung der Flugsteuerung für die Blickrichtung;
+- Zeitleiste, Wiedergabe und Simulationsgeschwindigkeit für 0 bis zwei
+  Milliarden Anzeigejahre;
+- Anklicken oder Katalogauswahl für Rohmesswerte und konkurrierende
+  Signaturhypothesen;
+- „Ziel anfliegen“ für einen sanften visuellen Autopiloten.
+
+Die Engine liefert ausschließlich relationale Knoten, Kanten, Simplizes,
+Messwerte und die mit `visual_embedding_only_not_physical_input` markierten
+Ansichtskoordinaten. Der Viewer ergänzt keine Kräfte, Objektbahnen oder
+astronomischen Entwicklungsgesetze. Seine räumliche Tiefendarstellung ist eine
+Navigation durch diese visuelle Einbettung und kein zusätzlicher Bestandteil
+der SubQG-Wirkung.
+
 ## Wissenschaftliche Grenze
 
 Die Simulation zeigt, welche hierarchischen Strukturen aus der implementierten

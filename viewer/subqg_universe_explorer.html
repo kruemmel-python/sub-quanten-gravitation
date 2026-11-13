@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#03060b">
+  <meta name="description" content="Interaktiver Flug durch die emergente SubQG-Universumsentwicklung.">
+  <title>SubQG Universe Explorer</title>
+  <link rel="stylesheet" href="./subqg_universe_explorer.css">
+</head>
+<body>
+  <canvas id="universe" aria-label="Dreidimensionale visuelle Einbettung des SubQG-Netzwerks"></canvas>
+
+  <div class="grain" aria-hidden="true"></div>
+  <header class="topbar glass">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div>
+        <p class="eyebrow">SUBQG / RELATIONAL FLIGHT LAB</p>
+        <h1>Universe Explorer <span>FPV11</span></h1>
+      </div>
+    </div>
+    <div class="telemetry" aria-live="polite">
+      <div><small>ALTER · ANZEIGESKALA</small><strong id="ageValue">0 Jahre</strong></div>
+      <div><small>RELATIONALE UHR</small><strong id="clockValue">0</strong></div>
+      <div><small>AKTUALISIERTE KNOTEN</small><strong id="nodeValue">1 / 320</strong></div>
+      <div class="status-cell"><small>ENGINE</small><strong><b id="engineLight"></b><span id="engineValue">STARTET</span></strong></div>
+    </div>
+  </header>
+
+  <aside class="left-panel glass" aria-label="Flugkontrollen">
+    <section>
+      <p class="section-label">FLUGMODUS</p>
+      <button id="enterFlight" class="primary wide"><span class="crosshair">⌖</span> Flugsteuerung aktivieren</button>
+      <div class="control-grid">
+        <kbd>W</kbd><span>Vorwärts</span><kbd>S</kbd><span>Rückwärts</span>
+        <kbd>A D</kbd><span>Seitwärts</span><kbd>Q E</kbd><span>Sinken / Steigen</span>
+        <kbd>⇧</kbd><span>Boost</span><kbd>ESC</kbd><span>Maus lösen</span>
+      </div>
+      <label class="range-label" for="flightSpeed"><span>Flugtempo</span><output id="flightSpeedValue">1.0×</output></label>
+      <input id="flightSpeed" type="range" min="0.25" max="4" step="0.25" value="1">
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <p class="section-label">SICHTBARE SIGNATUREN</p>
+        <button id="toggleEdges" class="icon-button active" title="Kanten ein-/ausblenden">NETZ</button>
+      </div>
+      <label class="filter"><input type="checkbox" data-filter="star" checked><i class="dot star"></i><span>Strahlende Kerne</span><b id="starCount">0</b></label>
+      <label class="filter"><input type="checkbox" data-filter="planet" checked><i class="dot planet"></i><span>Orbital-Kandidaten</span><b id="planetCount">0</b></label>
+      <label class="filter"><input type="checkbox" data-filter="unknown" checked><i class="dot unknown"></i><span>Unbekannte Strukturen</span><b id="unknownCount">0</b></label>
+      <label class="filter"><input type="checkbox" data-filter="complex" checked><i class="dot complex"></i><span>Strukturkomplexe</span><b id="complexCount">0</b></label>
+      <label class="filter"><input type="checkbox" data-filter="events" checked><i class="dot event"></i><span>Phasenfreisetzungen</span><b id="eventCount">0</b></label>
+    </section>
+
+    <section class="truth-note">
+      <span>VISUALISIERUNGSHINWEIS</span>
+      <p>Die 3D-Positionen sind eine visuelle Einbettung relationaler Daten – keine vorgegebene physische Raumkoordinate.</p>
+    </section>
+  </aside>
+
+  <aside class="right-panel glass" aria-label="Objektanalyse">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">ANALYSEZIEL</p>
+        <h2 id="objectTitle">Kein Ziel gewählt</h2>
+      </div>
+      <span id="objectTag" class="tag neutral">BEREIT</span>
+    </div>
+    <p id="objectSubtitle" class="muted">Klicke auf eine markierte Struktur oder wähle ein Ziel aus dem Katalog.</p>
+    <div id="objectMetrics" class="metric-list empty">
+      <div><small>ENERGIE</small><strong>—</strong></div>
+      <div><small>KOHÄRENZ</small><strong>—</strong></div>
+      <div><small>KONTRAKTION</small><strong>—</strong></div>
+      <div><small>PERSISTENZ</small><strong>—</strong></div>
+    </div>
+    <div class="analysis-box">
+      <small>MEHRHYPOTHESEN-ANALYSE</small>
+      <p id="analysisText">Die Klassifikation wird erst nach der Dynamik gebildet und verändert den SubQG-Zustand nicht.</p>
+    </div>
+    <div class="target-actions">
+      <button id="flyToTarget" class="primary" disabled>Ziel anfliegen</button>
+      <button id="nextTarget" class="secondary">Nächstes Ziel</button>
+    </div>
+    <div class="catalog-head"><span>AKTIVE ZIELE</span><span id="catalogCount">0</span></div>
+    <div id="targetCatalog" class="target-catalog" role="list"></div>
+  </aside>
+
+  <div id="flightReticle" class="reticle" aria-hidden="true"><i></i><i></i><span></span></div>
+  <div id="targetLabel" class="target-label" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer class="timeline-panel glass">
+    <div class="transport">
+      <button id="resetSimulation" class="transport-button" title="Zur Genesis zurück">↺</button>
+      <button id="playSimulation" class="play-button" title="Simulation starten oder pausieren">▶</button>
+      <label>SIMULATIONSTEMPO
+        <select id="simulationSpeed">
+          <option value="1">1 Epoche</option>
+          <option value="5">5 Epochen</option>
+          <option value="20" selected>20 Epochen</option>
+          <option value="100">100 Epochen</option>
+        </select>
+      </label>
+    </div>
+    <div class="timeline-main">
+      <div class="timeline-labels"><span>ERSTES RELATIONALES EREIGNIS</span><strong id="stageValue">GENESIS</strong><span>2 MRD. ANZEIGEJAHRE</span></div>
+      <input id="ageTimeline" type="range" min="0" max="2000" step="20" value="0" aria-label="Simulationsalter in Millionen Anzeigejahren">
+      <div class="era-track"><span>AKTUALISIERUNG</span><span>STRUKTURBILDUNG</span><span>EMERGENTE EPOCHE</span></div>
+    </div>
+    <div class="camera-readout">
+      <small>KAMERA / VISUELLE EINBETTUNG</small>
+      <strong id="cameraValue">X 0 · Y 0 · Z 850</strong>
+    </div>
+  </footer>
+
+  <div id="intro" class="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <div class="intro-card glass">
+      <div class="intro-orbit" aria-hidden="true"><i></i><i></i><span></span></div>
+      <p class="eyebrow">LIVE AUS DER SUBQG-ENGINE</p>
+      <h2 id="introTitle">Betritt ein Universum,<br>bevor Raum existiert.</h2>
+      <p>Beginne beim ersten relationalen Ereignis. Lasse das Phasennetzwerk wachsen, fliege frei durch die visuelle Einbettung und untersuche bekannte wie unbekannte emergente Signaturen.</p>
+      <div class="intro-facts">
+        <div><strong>0 → 2 Mrd.</strong><small>Anzeigejahre</small></div>
+        <div><strong>SubQG-only</strong><small>keine N-Body-Vorlage</small></div>
+        <div><strong>Live</strong><small>deterministische Engine</small></div>
+      </div>
+      <button id="beginExperience" class="primary hero-button">Universum initialisieren <span>→</span></button>
+      <small class="intro-disclaimer">Objektnamen sind nachträgliche Signaturhypothesen. Die Jahresangabe ist eine explizite Anzeigekalibrierung.</small>
+    </div>
+  </div>
+
+  <noscript>Für den interaktiven SubQG Universe Explorer muss JavaScript aktiviert sein.</noscript>
+  <script type="module" src="./subqg_universe_explorer.js"></script>
+</body>
+</html>

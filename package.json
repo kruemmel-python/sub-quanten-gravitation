@@ -10,6 +10,7 @@
     "demo": "node src/index.mjs --demo",
     "audit": "node src/index.mjs --audit",
     "test": "node --test tests/*.test.mjs",
+    "viewer:universe": "node viewer/serve_universe_viewer.mjs",
     "verify:lean": "powershell -ExecutionPolicy Bypass -File formal/verify.ps1",
     "validation:fetch:sparc": "powershell -ExecutionPolicy Bypass -File validation/scripts/fetch-sparc.ps1",
     "validation:fetch:little-things": "powershell -ExecutionPolicy Bypass -File validation/scripts/fetch-little-things.ps1",
