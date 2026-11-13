@@ -45,7 +45,10 @@
     <section>
       <div class="section-heading">
         <p class="section-label">SICHTBARE SIGNATUREN</p>
-        <button id="toggleEdges" class="icon-button active" title="Kanten ein-/ausblenden">NETZ</button>
+        <div class="view-toggles">
+          <button id="toggleCinematic" class="icon-button active" title="Cineastische Strukturen ein-/ausblenden">KOSMOS</button>
+          <button id="toggleEdges" class="icon-button" title="Kanten ein-/ausblenden">NETZ</button>
+        </div>
       </div>
       <label class="filter"><input type="checkbox" data-filter="star" checked><i class="dot star"></i><span>Strahlende Kerne</span><b id="starCount">0</b></label>
       <label class="filter"><input type="checkbox" data-filter="planet" checked><i class="dot planet"></i><span>Orbital-Kandidaten</span><b id="planetCount">0</b></label>
@@ -56,7 +59,7 @@
 
     <section class="truth-note">
       <span>VISUALISIERUNGSHINWEIS</span>
-      <p>Die 3D-Positionen sind eine visuelle Einbettung relationaler Daten – keine vorgegebene physische Raumkoordinate.</p>
+      <p>Farben, Nebel und Spiralformen visualisieren relationale Messwerte. Sie sind keine vorgegebenen astronomischen Bilder oder physischen Raumkoordinaten.</p>
     </section>
   </aside>
 

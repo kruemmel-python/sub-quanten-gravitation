@@ -63,6 +63,7 @@ kbd { display: inline-flex; justify-content: center; align-items: center; min-he
 .range-label output { color: var(--cyan); font-family: var(--mono); }
 input[type="range"] { width: 100%; accent-color: var(--cyan); cursor: pointer; }
 .section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.view-toggles { display: flex; gap: 4px; }
 .icon-button { padding: 4px 7px; font: 650 8px var(--mono); letter-spacing: .1em; background: rgba(255,255,255,.04); color: var(--muted); border: 1px solid var(--line); }
 .icon-button.active { color: var(--cyan); border-color: rgba(80,230,255,.45); background: var(--cyan-dim); }
 .filter { display: grid; grid-template-columns: 15px 8px 1fr auto; align-items: center; gap: 7px; min-height: 28px; color: #afc1ce; font-size: 10px; cursor: pointer; }

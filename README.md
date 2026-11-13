@@ -124,7 +124,11 @@ verändern.
 Der Webviewer berechnet die Entwicklung in einem separaten Worker direkt mit
 `SubQGUniverseEvolution`. Er ermöglicht freien Flug, Zeitsteuerung von der
 Genesis bis zwei Milliarden Anzeigejahre, anwählbare Strukturen,
-Mehrhypothesen-Analyse und einen dauerhaften Filter für unbekannte Objekte.
+Mehrhypothesen-Analyse und einen dauerhaften Filter für unbekannte Objekte. Die
+filmische KOSMOS-Ansicht erzeugt Nebel, Leuchtkerne und Spiralanteile
+prozedural aus den SubQG-Messwerten; sie lädt keine vorgefertigten
+Weltraumbilder und verändert die Dynamik nicht. Die NETZ-Ansicht macht die
+relationale Einbettung zusätzlich sichtbar.
 
 **Öffentlicher Viewer:**
 [SubQG Universe Explorer starten](https://kruemmel-python.github.io/sub-quanten-gravitation/)

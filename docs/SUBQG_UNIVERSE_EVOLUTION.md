@@ -174,6 +174,40 @@ Bedienung:
   Signaturhypothesen;
 - „Ziel anfliegen“ für einen sanften visuellen Autopiloten.
 
+### Mathematische Bindung der filmischen Ansicht
+
+Die KOSMOS-Ansicht ist keine unabhängige Animation. Sie setzt ausschließlich
+bereits berechnete SubQG-Größen deterministisch in Darstellungseigenschaften
+um:
+
+| SubQG-Messwert | Darstellung |
+|---|---|
+| Gesamtenergie und Mitgliederzahl | sichtbare Ausdehnung und Partikeldichte |
+| Kohärenz und Kontraktion | Scheibendicke, Bündelung und Spiralordnung |
+| Nebel-Hypothese, Knotenzahl und auswärts gerichteter Fluss | Stärke und Ausdehnung diffuser Felder |
+| Galaxien-Hypothese | Stärke geordneter Spiralanteile |
+| persistenter strahlender Kern | Leuchtkern und Korona |
+| Phasenfreisetzungsereignis | expandierender Signaturring |
+
+Jedes unbekannte Einzelobjekt wird außerdem mit seinen tatsächlich zum
+SubQG-Becken gehörenden Knoten und deren Ansichtskoordinaten als eigener
+relationaler Fingerabdruck gezeichnet. Es gibt daher kein wiederverwendetes
+„Unbekannt“-Modell. Die sichtbare Individualität stammt aus dem jeweiligen
+Zustand; lediglich Farbe, Leuchteffekt und Linienbreite sind rückwirkungsfreie
+visuelle Kodierungen der zugehörigen Messwerte.
+
+Farbe und Animationsphase sind visuelle Kodierungen, keine zusätzlich
+behaupteten Observablen. Der Schalter `NETZ` blendet die zugrunde liegenden
+relationalen Verbindungen ein; `KOSMOS` schaltet die Morphologie aus und ein.
+
+Unbekannte Strukturen werden fortlaufend analysiert. Einzelobjekte erhalten
+Rangwerte für Kern-, Orbital- und Nebelhypothesen; gebundene Komplexe werden
+als Galaxien- und Nebelhypothese verglichen. Der Viewer zeigt die Rangfolge und
+Konfidenz. Die Bezeichnung `SUBQG-AUFGELÖST` erscheint nur, wenn die in der
+Engine definierte absolute Schwelle und der Abstand zur zweitbesten Hypothese
+erfüllt sind. Andernfalls bleibt das Objekt trotz sichtbarer morphologischer
+Hinweise ausdrücklich `UNAUFGELÖST`.
+
 Die Engine liefert ausschließlich relationale Knoten, Kanten, Simplizes,
 Messwerte und die mit `visual_embedding_only_not_physical_input` markierten
 Ansichtskoordinaten. Der Viewer ergänzt keine Kräfte, Objektbahnen oder

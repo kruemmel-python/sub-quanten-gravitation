@@ -22,7 +22,11 @@ dokumentiert.
   freiem 3D-Flug, Zeitnavigation, Zielautopilot, Objektanalyse und Filtern für
   unbekannte Strukturen;
 - robuste Maus-Zielerfassung über Markierungsringe sowie Fadenkreuzauswahl im
-  Pointer-Lock-Flugmodus.
+  Pointer-Lock-Flugmodus;
+- filmische, rein prozedurale KOSMOS-Ansicht mit datenabhängigen Nebelfeldern,
+  Spiralanteilen, Leuchtkernen, Flugparallaxe und Phasenfreisetzungsringen;
+- sichtbare Rangfolge der SubQG-Hypothesen für unbekannte Objekte und klare
+  Kennzeichnung, ob die mathematischen Auflösungsschwellen bereits erfüllt sind.
 
 ## 1.0.0 – 2026-11-13
 
