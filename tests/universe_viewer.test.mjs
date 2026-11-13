@@ -46,6 +46,10 @@ test('viewer supports free flight, target selection and responsive presentation'
   assert.match(client, /Ziel erfasst:/);
   assert.match(client, /function buildCinematicField/);
   assert.match(client, /function drawCinematicStructures/);
+  assert.match(client, /function drawGalaxyBody/);
+  assert.match(client, /function drawStarBody/);
+  assert.match(client, /function drawPlanetBody/);
+  assert.match(client, /function frameFirstResolvedGalaxy/);
   assert.match(client, /function createNebulaTexture/);
   assert.match(client, /evidenceConfidence\(data, 'galaxy_candidate'\)/);
   assert.match(client, /evidenceConfidence\(data, 'nebula_candidate'\)/);

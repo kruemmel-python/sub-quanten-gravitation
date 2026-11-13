@@ -128,7 +128,11 @@ Mehrhypothesen-Analyse und einen dauerhaften Filter für unbekannte Objekte. Die
 filmische KOSMOS-Ansicht erzeugt Nebel, Leuchtkerne und Spiralanteile
 prozedural aus den SubQG-Messwerten; sie lädt keine vorgefertigten
 Weltraumbilder und verändert die Dynamik nicht. Die NETZ-Ansicht macht die
-relationale Einbettung zusätzlich sichtbar.
+relationale Einbettung zusätzlich sichtbar. Aufgelöste Galaxienkomplexe werden
+als klar erkennbare Scheiben mit datenabhängiger Armzahl dargestellt,
+Strahlungskerne als feste Sternkörper und Orbitalkandidaten als beleuchtete
+Körper. Die erste aufgelöste Galaxie wird einmalig automatisch eingerahmt;
+danach übernimmt ausschließlich der Nutzer die Kamera.
 
 **Öffentlicher Viewer:**
 [SubQG Universe Explorer starten](https://kruemmel-python.github.io/sub-quanten-gravitation/)

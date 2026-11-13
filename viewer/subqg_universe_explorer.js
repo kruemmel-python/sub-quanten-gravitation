@@ -44,6 +44,8 @@ const state = {
   nebulaTexture: null,
   cameraMotion: 0,
   previousCamera: { x: 0, y: 28, z: 490 },
+  cameraUserControlled: false,
+  autoFramedTargetId: null,
   lastFrame: performance.now(),
   toastTimer: 0
 };
@@ -100,7 +102,7 @@ function resize() {
   canvas.style.width = `${innerWidth}px`;
   canvas.style.height = `${innerHeight}px`;
   context.setTransform(ratio, 0, 0, ratio, 0, 0);
-  state.stars = Array.from({ length: Math.max(180, Math.floor(innerWidth * innerHeight / 5200)) }, (_, index) => ({
+  state.stars = Array.from({ length: Math.max(620, Math.floor(innerWidth * innerHeight / 1450)) }, (_, index) => ({
     x: seededNoise(index, 1), y: seededNoise(index, 2), size: .35 + seededNoise(index, 3) * 1.35,
     alpha: .18 + seededNoise(index, 4) * .62
   }));
@@ -218,7 +220,7 @@ function buildCinematicField() {
     const contraction = clamp01(data.meanContraction * 4);
     const energy = energyScale(data.totalEnergy);
     const radius = 24 + 52 * energy + Math.min(34, data.memberCount * 3.2);
-    const particleCount = Math.round(45 + 115 * Math.max(galaxyEvidence, nebulaEvidence) + Math.min(70, data.memberCount * 7));
+    const particleCount = Math.round(95 + 220 * Math.max(galaxyEvidence, nebulaEvidence) + Math.min(115, data.memberCount * 10));
     const arms = 2 + Math.min(3, Math.floor((data.radiantCoreCount + data.orbitalBodyCount) / 2));
     const particles = [];
     for (let index = 0; index < particleCount; index++) {
@@ -235,7 +237,7 @@ function buildCinematicField() {
       });
     }
     structures.push({
-      kind: 'complex', target, seed, particles, radius, energy, coherence, contraction,
+      kind: 'complex', target, seed, particles, radius, energy, coherence, contraction, arms,
       galaxyEvidence, nebulaEvidence,
       memberPoints: (data.memberObjectIds ?? [])
         .map(id => state.objectTargets.find(item => item.data.id === id)?.position)
@@ -269,6 +271,32 @@ function buildCinematicField() {
     });
   }
   state.cinematicStructures = structures;
+  frameFirstResolvedGalaxy();
+}
+
+function frameFirstResolvedGalaxy() {
+  if (state.cameraUserControlled || state.autoFramedTargetId) return;
+  const target = state.complexTargets
+    .filter(item => item.data.activeAtSnapshot && item.data.analysis?.status === 'RESOLVED' &&
+      currentInterpretation(item.data) === 'galaxy_candidate')
+    .sort((a, b) => evidenceConfidence(b.data, 'galaxy_candidate') - evidenceConfidence(a.data, 'galaxy_candidate'))[0];
+  if (!target) return;
+  let direction = subtract(target.position, state.camera);
+  let distance = Math.max(1, length(direction));
+  const overviewDistance = 285;
+  if (distance > overviewDistance) {
+    const unit = { x: direction.x / distance, y: direction.y / distance, z: direction.z / distance };
+    state.camera.x = target.position.x - unit.x * overviewDistance;
+    state.camera.y = target.position.y - unit.y * overviewDistance;
+    state.camera.z = target.position.z - unit.z * overviewDistance;
+    state.previousCamera = { x: state.camera.x, y: state.camera.y, z: state.camera.z };
+    state.cameraMotion = 0;
+    direction = subtract(target.position, state.camera);
+    distance = Math.max(1, length(direction));
+  }
+  state.camera.yaw = Math.atan2(direction.x, -direction.z);
+  state.camera.pitch = Math.asin(Math.max(-1, Math.min(1, direction.y / distance)));
+  state.autoFramedTargetId = target.data.id;
 }
 
 function updateHud() {
@@ -450,13 +478,13 @@ function drawBackground(time) {
   if (state.cinematic && state.nebulaTexture && state.snapshot) {
     const ageFraction = clamp01(state.snapshot.ageYears / MAX_AGE);
     const activeFraction = clamp01(state.snapshot.actualizedSector.activeFraction);
-    const haze = .18 + ageFraction * .28 + activeFraction * .16;
+    const haze = .07 + ageFraction * .12 + activeFraction * .07;
     const driftX = Math.sin(time * .000025 + state.camera.yaw) * innerWidth * .07;
     const driftY = Math.cos(time * .000019 + state.camera.pitch) * innerHeight * .06;
     context.save();
     context.globalCompositeOperation = 'screen';
     context.globalAlpha = haze;
-    context.filter = 'blur(16px) saturate(1.9) contrast(1.08)';
+    context.filter = 'blur(20px) saturate(1.45) contrast(1.03)';
     context.drawImage(state.nebulaTexture, -innerWidth * .1 + driftX, -innerHeight * .2 + driftY, innerWidth * 1.2, innerHeight * 1.4);
     context.scale(-1, 1);
     context.globalAlpha = haze * .52;
@@ -487,107 +515,180 @@ function drawBackground(time) {
   context.restore();
 }
 
+function drawGalaxyBody(structure, center, screenRadius, seconds, certainty) {
+  const radius = Math.max(24, Math.min(150, screenRadius * 1.18));
+  const flattening = .58 + Math.abs(Math.cos(structure.tilt)) * .22;
+  const rotation = structure.rotation * .35 + seconds * (.012 + structure.coherence * .024);
+  context.save();
+  context.translate(center.x, center.y);
+  context.rotate(structure.rotation * .24);
+  context.scale(1, flattening);
+
+  context.globalCompositeOperation = 'source-over';
+  const disk = context.createRadialGradient(0, 0, radius * .04, 0, 0, radius);
+  disk.addColorStop(0, `hsla(${38 + structure.hue % 22},90%,86%,${.68 * certainty})`);
+  disk.addColorStop(.12, `hsla(${structure.hue - 35},78%,63%,${.54 * certainty})`);
+  disk.addColorStop(.52, `hsla(${structure.hue},72%,29%,${.28 * certainty})`);
+  disk.addColorStop(1, `hsla(${structure.hue + 45},75%,12%,0)`);
+  context.fillStyle = disk;
+  context.beginPath(); context.arc(0, 0, radius, 0, Math.PI * 2); context.fill();
+
+  context.globalCompositeOperation = 'screen';
+  context.strokeStyle = `hsla(${structure.hue + 44},96%,72%,${.12 * certainty})`;
+  context.lineWidth = Math.max(1.1, radius * .014);
+  for (let arm = 0; arm < structure.arms; arm++) {
+    context.beginPath();
+    for (let step = 0; step <= 64; step++) {
+      const radial = .1 + step / 64 * .86;
+      const angle = arm / structure.arms * Math.PI * 2 + radial * (4.2 + structure.contraction * 2.4) + rotation;
+      const x = Math.cos(angle) * radial * radius;
+      const y = Math.sin(angle) * radial * radius;
+      if (step === 0) context.moveTo(x, y); else context.lineTo(x, y);
+    }
+    context.stroke();
+  }
+  for (const particle of structure.particles) {
+    const normalizedRadius = particle.radius / Math.max(1, structure.radius);
+    const angle = particle.angle + rotation;
+    const x = Math.cos(angle) * normalizedRadius * radius;
+    const y = Math.sin(angle) * normalizedRadius * radius + particle.height / Math.max(1, structure.radius) * radius;
+    const alpha = particle.alpha * (.28 + structure.galaxyEvidence * .72) * certainty;
+    context.fillStyle = `hsla(${structure.hue + normalizedRadius * 76},96%,${62 + structure.coherence * 24}%,${alpha})`;
+    context.beginPath();
+    context.arc(x, y, .55 + particle.size * .72, 0, Math.PI * 2);
+    context.fill();
+  }
+
+  const core = context.createRadialGradient(0, 0, 0, 0, 0, radius * .23);
+  core.addColorStop(0, `rgba(255,255,238,${.98 * certainty})`);
+  core.addColorStop(.28, `hsla(46,100%,75%,${.84 * certainty})`);
+  core.addColorStop(1, 'rgba(255,190,86,0)');
+  context.fillStyle = core;
+  context.beginPath(); context.arc(0, 0, radius * .23, 0, Math.PI * 2); context.fill();
+
+  context.globalCompositeOperation = 'source-over';
+  context.strokeStyle = `rgba(2,4,10,${.22 * certainty})`;
+  context.lineWidth = Math.max(1.2, radius * .018);
+  for (let arm = 0; arm < structure.arms; arm++) {
+    context.beginPath();
+    for (let step = 0; step <= 44; step++) {
+      const radial = .16 + step / 44 * .78;
+      const angle = arm / structure.arms * Math.PI * 2 + radial * (4.2 + structure.contraction * 2.4) + rotation;
+      const x = Math.cos(angle) * radial * radius;
+      const y = Math.sin(angle) * radial * radius;
+      if (step === 0) context.moveTo(x, y); else context.lineTo(x, y);
+    }
+    context.stroke();
+  }
+  context.restore();
+}
+
+function drawNebulaBody(structure, center, screenRadius, seconds, strength = 1) {
+  const radius = Math.max(18, Math.min(145, screenRadius * (1.05 + structure.nebulaEvidence)));
+  context.save();
+  context.globalCompositeOperation = 'screen';
+  for (let lobe = 0; lobe < 7; lobe++) {
+    const phase = seededNoise(structure.seed + lobe, 31) * Math.PI * 2 + seconds * (.006 + lobe * .001);
+    const distance = radius * (.08 + seededNoise(structure.seed + lobe, 33) * .38);
+    const x = center.x + Math.cos(phase) * distance;
+    const y = center.y + Math.sin(phase) * distance * .64;
+    const lobeRadius = radius * (.34 + seededNoise(structure.seed + lobe, 32) * .48);
+    const cloud = context.createRadialGradient(x, y, 0, x, y, lobeRadius);
+    cloud.addColorStop(0, `hsla(${structure.hue + lobe * 17},92%,67%,${(.14 + structure.nebulaEvidence * .22) * strength})`);
+    cloud.addColorStop(.46, `hsla(${structure.hue - 42 + lobe * 11},88%,43%,${(.08 + structure.nebulaEvidence * .12) * strength})`);
+    cloud.addColorStop(1, `hsla(${structure.hue + 68},90%,24%,0)`);
+    context.fillStyle = cloud;
+    context.beginPath(); context.arc(x, y, lobeRadius, 0, Math.PI * 2); context.fill();
+  }
+  context.restore();
+}
+
+function drawStarBody(structure, center, screenRadius) {
+  const bodyRadius = Math.max(2.2, Math.min(8.5, 2.5 + structure.energy * 4.5 + screenRadius * .035));
+  context.save();
+  context.globalCompositeOperation = 'screen';
+  const halo = context.createRadialGradient(center.x, center.y, bodyRadius, center.x, center.y, bodyRadius * 3.2);
+  halo.addColorStop(0, `hsla(${42 + structure.hue % 28},100%,72%,${.48 + structure.energy * .22})`);
+  halo.addColorStop(1, 'rgba(255,170,70,0)');
+  context.fillStyle = halo;
+  context.beginPath(); context.arc(center.x, center.y, bodyRadius * 3.2, 0, Math.PI * 2); context.fill();
+  context.globalCompositeOperation = 'source-over';
+  const sphere = context.createRadialGradient(center.x - bodyRadius * .28, center.y - bodyRadius * .3, 0, center.x, center.y, bodyRadius);
+  sphere.addColorStop(0, '#ffffff'); sphere.addColorStop(.34, '#fff4ba'); sphere.addColorStop(.78, '#ffad45'); sphere.addColorStop(1, '#b83818');
+  context.fillStyle = sphere;
+  context.beginPath(); context.arc(center.x, center.y, bodyRadius, 0, Math.PI * 2); context.fill();
+  context.restore();
+}
+
+function drawPlanetBody(structure, center, screenRadius) {
+  const radius = Math.max(2.4, Math.min(9, 2.4 + structure.energy * 4 + screenRadius * .028));
+  const hue = structure.hue + structure.phaseCurrent * 48;
+  context.save();
+  context.globalCompositeOperation = 'source-over';
+  if (structure.phaseCurrent > .22) {
+    context.strokeStyle = `hsla(${hue + 35},70%,75%,${.16 + structure.phaseCurrent * .22})`;
+    context.lineWidth = .7;
+    context.beginPath(); context.ellipse(center.x, center.y, radius * 2.2, radius * .65, -.25, 0, Math.PI * 2); context.stroke();
+  }
+  const sphere = context.createRadialGradient(center.x - radius * .35, center.y - radius * .38, radius * .08, center.x, center.y, radius);
+  sphere.addColorStop(0, `hsl(${hue},78%,80%)`);
+  sphere.addColorStop(.48, `hsl(${hue + 12},64%,50%)`);
+  sphere.addColorStop(1, `hsl(${hue + 28},72%,12%)`);
+  context.fillStyle = sphere;
+  context.beginPath(); context.arc(center.x, center.y, radius, 0, Math.PI * 2); context.fill();
+  context.fillStyle = 'rgba(0,3,10,.38)';
+  context.beginPath(); context.arc(center.x + radius * .42, center.y + radius * .1, radius * .86, 0, Math.PI * 2); context.fill();
+  context.restore();
+}
+
+function drawFingerprintBody(structure, center, screenRadius, seconds) {
+  drawNebulaBody(structure, center, screenRadius, seconds, .52);
+  const points = structure.nodePoints.map(position => project(position)).filter(Boolean);
+  const emphasized = structure.target === state.selected || structure.target === state.hovered || state.edgesVisible;
+  context.save();
+  context.globalCompositeOperation = 'source-over';
+  context.strokeStyle = `hsla(${structure.hue},95%,70%,${emphasized ? .24 + structure.coherence * .34 : .04})`;
+  context.lineWidth = .75 + structure.contraction * 1.2;
+  for (const point of points) {
+    if (emphasized) {
+      context.beginPath(); context.moveTo(center.x, center.y); context.lineTo(point.x, point.y); context.stroke();
+    }
+    context.fillStyle = `hsla(${structure.hue + structure.outwardFlux * 65},96%,76%,${emphasized ? .58 + structure.energy * .34 : .18})`;
+    context.beginPath(); context.arc(point.x, point.y, Math.max(1.2, Math.min(4.2, 1.2 + point.scale)), 0, Math.PI * 2); context.fill();
+  }
+  context.restore();
+}
+
 function drawCinematicStructures(time) {
   if (!state.cinematic) return;
   const seconds = time * .001;
-  const structures = [...state.cinematicStructures].sort((a, b) => {
-    const pointA = project(a.target.position);
-    const pointB = project(b.target.position);
-    return (pointB?.depth ?? -1) - (pointA?.depth ?? -1);
-  });
+  const structures = [...state.cinematicStructures].sort((a, b) =>
+    (project(b.target.position)?.depth ?? -1) - (project(a.target.position)?.depth ?? -1));
 
-  context.save();
-  context.globalCompositeOperation = 'screen';
   for (const structure of structures) {
     if (!state.filters[structure.target.type]) continue;
     const center = project(structure.target.position);
     if (!center || center.x < -260 || center.x > innerWidth + 260 || center.y < -260 || center.y > innerHeight + 260) continue;
-    const screenRadius = Math.max(5, Math.min(190, structure.radius * center.scale));
+    const screenRadius = Math.max(7, Math.min(180, structure.radius * center.scale));
+    const interpretation = currentInterpretation(structure.target.data);
+    const resolved = structure.target.data.analysis?.status === 'RESOLVED';
 
     if (structure.kind === 'complex') {
-      const diffuseAlpha = (.035 + structure.nebulaEvidence * .13) * Math.min(1, screenRadius / 18);
-      for (let lobe = 0; lobe < 4; lobe++) {
-        const phase = seededNoise(structure.seed + lobe, 31) * Math.PI * 2 + seconds * (.018 + lobe * .004);
-        const lobeX = center.x + Math.cos(phase) * screenRadius * (.12 + lobe * .035);
-        const lobeY = center.y + Math.sin(phase) * screenRadius * (.08 + lobe * .025);
-        const lobeRadius = screenRadius * (1.15 + seededNoise(structure.seed + lobe, 32) * .85);
-        const cloud = context.createRadialGradient(lobeX, lobeY, 0, lobeX, lobeY, lobeRadius);
-        cloud.addColorStop(0, `hsla(${structure.hue + lobe * 19},95%,62%,${diffuseAlpha})`);
-        cloud.addColorStop(.42, `hsla(${structure.hue - 42 + lobe * 13},92%,45%,${diffuseAlpha * .62})`);
-        cloud.addColorStop(1, `hsla(${structure.hue + 75},90%,30%,0)`);
-        context.fillStyle = cloud;
-        context.beginPath(); context.arc(lobeX, lobeY, lobeRadius, 0, Math.PI * 2); context.fill();
-      }
-
-      // Actual member anchors remain visible inside the inferred morphology.
-      context.strokeStyle = `hsla(${structure.hue},100%,76%,${.06 + structure.coherence * .12})`;
-      context.lineWidth = .55;
-      for (const memberPosition of structure.memberPoints) {
-        const member = project(memberPosition);
-        if (!member) continue;
-        context.beginPath(); context.moveTo(center.x, center.y); context.lineTo(member.x, member.y); context.stroke();
-      }
-
-      const rotation = seconds * (.015 + structure.coherence * .035) + structure.rotation;
-      const cosTilt = Math.cos(structure.tilt);
-      const sinTilt = Math.sin(structure.tilt);
-      for (const particle of structure.particles) {
-        const angle = particle.angle + rotation;
-        const localX = Math.cos(angle) * particle.radius;
-        const localZ = Math.sin(angle) * particle.radius;
-        const localY = particle.height;
-        const point = project({
-          x: structure.target.position.x + localX,
-          y: structure.target.position.y + localY * cosTilt - localZ * sinTilt,
-          z: structure.target.position.z + localY * sinTilt + localZ * cosTilt
-        });
-        if (!point) continue;
-        const alpha = particle.alpha * (.18 + structure.galaxyEvidence * .72) * Math.min(1, 260 / point.depth);
-        context.fillStyle = `hsla(${structure.hue + particle.radius / structure.radius * 72},100%,${60 + structure.coherence * 25}%,${alpha})`;
-        context.beginPath();
-        context.arc(point.x, point.y, Math.max(.35, Math.min(3.8, particle.size * point.scale)), 0, Math.PI * 2);
-        context.fill();
+      const galaxyStrength = resolved && interpretation === 'galaxy_candidate'
+        ? 1 : .2 + structure.galaxyEvidence * .38;
+      if (structure.galaxyEvidence > .22) drawGalaxyBody(structure, center, screenRadius, seconds, galaxyStrength);
+      if (interpretation === 'nebula_candidate' || structure.nebulaEvidence > .34) {
+        drawNebulaBody(structure, center, screenRadius, seconds,
+          resolved && interpretation === 'nebula_candidate' ? 1 : .38 + structure.nebulaEvidence * .35);
       }
     } else if (structure.kind === 'core') {
-      const radius = Math.max(5, screenRadius * (.55 + structure.contraction * .55));
-      const glow = context.createRadialGradient(center.x, center.y, 0, center.x, center.y, radius * 4.5);
-      glow.addColorStop(0, 'rgba(255,255,238,.96)');
-      glow.addColorStop(.08, `hsla(${42 + structure.hue % 34},100%,72%,.92)`);
-      glow.addColorStop(.35, `hsla(${structure.hue},100%,58%,${.22 + structure.energy * .28})`);
-      glow.addColorStop(1, `hsla(${structure.hue + 70},100%,45%,0)`);
-      context.fillStyle = glow;
-      context.beginPath(); context.arc(center.x, center.y, radius * 4.5, 0, Math.PI * 2); context.fill();
-      context.strokeStyle = `hsla(${structure.hue},100%,82%,${.18 + structure.energy * .28})`;
-      context.lineWidth = .7;
-      context.beginPath(); context.moveTo(center.x - radius * 6, center.y); context.lineTo(center.x + radius * 6, center.y); context.stroke();
+      drawStarBody(structure, center, screenRadius);
+    } else if (structure.kind === 'orbital') {
+      drawPlanetBody(structure, center, screenRadius);
     } else {
-      const diffuse = structure.kind === 'diffuse' ? Math.max(.18, structure.nebulaEvidence) : .12;
-      const radius = screenRadius * (1.1 + diffuse * 1.8);
-      const cloud = context.createRadialGradient(center.x, center.y, 0, center.x, center.y, radius);
-      cloud.addColorStop(0, `hsla(${structure.hue},95%,65%,${.07 + diffuse * .19})`);
-      cloud.addColorStop(.45, `hsla(${structure.hue + 55},92%,48%,${.03 + diffuse * .09})`);
-      cloud.addColorStop(1, `hsla(${structure.hue + 90},90%,35%,0)`);
-      context.fillStyle = cloud;
-      context.beginPath(); context.arc(center.x, center.y, radius, 0, Math.PI * 2); context.fill();
-
-      // The individual fingerprint uses the object's real SubQG basin nodes,
-      // rather than a reusable icon or a random astronomical silhouette.
-      const fingerprintPoints = structure.nodePoints.map(position => project(position)).filter(Boolean);
-      context.strokeStyle = `hsla(${structure.hue},100%,72%,${.12 + structure.coherence * .32})`;
-      context.lineWidth = .6 + structure.contraction * .8;
-      for (const point of fingerprintPoints) {
-        context.beginPath();
-        context.moveTo(center.x, center.y);
-        context.lineTo(point.x, point.y);
-        context.stroke();
-        context.fillStyle = `hsla(${structure.hue + structure.outwardFlux * 65},100%,78%,${.28 + structure.energy * .48})`;
-        context.beginPath();
-        context.arc(point.x, point.y, Math.max(.7, Math.min(3.2, (1 + structure.contraction) * point.scale)), 0, Math.PI * 2);
-        context.fill();
-      }
+      drawFingerprintBody(structure, center, screenRadius, seconds);
     }
   }
-  context.restore();
 }
 
 function drawGraph(time) {
@@ -624,7 +725,7 @@ function drawGraph(time) {
     const position = state.nodePositions.get(id);
     const target = objectAtNode.get(id);
     const radius = Math.max(.7, Math.min(3.3, .6 + position.amplitude * 1.6 + point.scale * .8));
-    context.globalAlpha = Math.min(state.cinematic ? .48 : 1, .18 + position.amplitude * .62);
+    context.globalAlpha = Math.min(state.cinematic ? .15 : 1, .12 + position.amplitude * .55);
     context.fillStyle = target && state.filters[target.type] ? typeColor(target.type) : '#8bd5e6';
     context.beginPath();
     context.arc(point.x, point.y, radius, 0, Math.PI * 2);
@@ -656,7 +757,7 @@ function drawTargets(projected, time) {
     context.beginPath();
     context.arc(point.x, point.y, radius, 0, Math.PI * 2);
     context.stroke();
-    if (target.type === 'star') {
+    if (target.type === 'star' && !state.cinematic) {
       const glow = context.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius * 2.4);
       glow.addColorStop(0, typeColor('star', .38));
       glow.addColorStop(1, typeColor('star', 0));
@@ -729,6 +830,7 @@ function updateCamera(deltaSeconds) {
   const magnitude = length(direction);
   if (magnitude > 0) {
     state.autopilot = null;
+    state.cameraUserControlled = true;
     camera.x += direction.x / magnitude * speed;
     camera.y += direction.y / magnitude * speed;
     camera.z += direction.z / magnitude * speed;
@@ -826,6 +928,8 @@ dom.reset.addEventListener('click', () => {
   state.camera = { x: 0, y: 28, z: 490, yaw: 0, pitch: -0.055 };
   state.cameraMotion = 0;
   state.previousCamera = { x: 0, y: 28, z: 490 };
+  state.cameraUserControlled = false;
+  state.autoFramedTargetId = null;
   post('reset');
 });
 dom.timeline.addEventListener('change', () => {
@@ -851,6 +955,7 @@ $$('[data-filter]').forEach(input => input.addEventListener('change', () => {
 
 dom.flyTo.addEventListener('click', () => {
   if (!state.selected) return;
+  state.cameraUserControlled = true;
   state.autopilot = { target: state.selected, stopDistance: state.selected.kind === 'complex' ? 90 : 52 };
   showToast(`Autopilot: ${targetTitle(state.selected)}`);
 });
@@ -891,6 +996,7 @@ window.addEventListener('pointermove', event => {
     state.drag = { x: event.clientX, y: event.clientY };
   }
   state.autopilot = null;
+  state.cameraUserControlled = true;
   state.camera.yaw += movementX * .0022;
   state.camera.pitch = Math.max(-1.48, Math.min(1.48, state.camera.pitch - movementY * .0022));
 });

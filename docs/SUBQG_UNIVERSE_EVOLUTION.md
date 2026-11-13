@@ -199,6 +199,12 @@ visuelle Kodierungen der zugehörigen Messwerte.
 Farbe und Animationsphase sind visuelle Kodierungen, keine zusätzlich
 behaupteten Observablen. Der Schalter `NETZ` blendet die zugrunde liegenden
 relationalen Verbindungen ein; `KOSMOS` schaltet die Morphologie aus und ein.
+Ein mathematisch aufgelöster Galaxienkomplex erhält eine abgegrenzte Scheibe,
+deren Armzahl aus der Zahl strahlender Kerne und gebundener Orbitalkandidaten
+folgt. Stern- und Orbitalkandidaten besitzen erkennbare Körper statt bloßer
+Leuchtflecken. Zur Orientierung rahmt die Kamera den ersten aufgelösten
+Galaxienkomplex einmalig ein, solange der Nutzer noch nicht selbst gesteuert
+hat. Diese Kamerafunktion verändert keine Simulationsdaten.
 
 Unbekannte Strukturen werden fortlaufend analysiert. Einzelobjekte erhalten
 Rangwerte für Kern-, Orbital- und Nebelhypothesen; gebundene Komplexe werden

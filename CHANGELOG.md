@@ -26,7 +26,11 @@ dokumentiert.
 - filmische, rein prozedurale KOSMOS-Ansicht mit datenabhängigen Nebelfeldern,
   Spiralanteilen, Leuchtkernen, Flugparallaxe und Phasenfreisetzungsringen;
 - sichtbare Rangfolge der SubQG-Hypothesen für unbekannte Objekte und klare
-  Kennzeichnung, ob die mathematischen Auflösungsschwellen bereits erfüllt sind.
+  Kennzeichnung, ob die mathematischen Auflösungsschwellen bereits erfüllt sind;
+- klar abgegrenzte Galaxienscheiben mit datenabhängigen Spiralarmen und
+  Staubbahnen, feste Sternkörper, beleuchtete Orbitalkörper sowie automatische
+  Erstausrichtung auf den ersten aufgelösten Galaxienkomplex statt einer von
+  Bloom dominierten technischen Punktwolke.
 
 ## 1.0.0 – 2026-11-13
 
