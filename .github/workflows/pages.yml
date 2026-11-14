@@ -36,7 +36,7 @@ jobs:
           cp -R viewer src _site/
           cp viewer/pages-index.html _site/index.html
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: _site
       - name: Deploy to GitHub Pages
