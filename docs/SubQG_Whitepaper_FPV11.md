@@ -1,9 +1,9 @@
 ---
-title: "SubQG Genesis, emergente Universen, Objektgravitation & formale Verifikation"
-subtitle: "Von prä-geometrischen Phasen zu Raumzeit, unbekannten Strukturen, gebundenen Kandidaten, Multiversen und Lean-4-Beweisen"
+title: "SubQG Genesis, emergente Universen, Objektgravitation, Analog-Hardware & formale Verifikation"
+subtitle: "Von prä-geometrischen Phasen zu Raumzeit, unbekannten Strukturen, gebundenen Kandidaten, Multiversen, nachbaubarer Laborhardware und Lean-4-Beweisen"
 author: "Ralf Krümmel · SubQG-Forschungsprojekt"
-date: "13. November 2026"
-version: "FPV11 · Forschungswhitepaper 3.0 (Universumsentwicklung)"
+date: "14. November 2026"
+version: "FPV11 · Forschungswhitepaper 3.1 (Universumsentwicklung & Hardware-Labor)"
 lang: de-DE
 ---
 
@@ -15,10 +15,11 @@ Subquantum Graphity (SubQG) untersucht, ob sich Raumzeit, interne Uhren, Träghe
 2. **Das SubQG-Vakuum und der Asteroidenflug:** Es wird analytisch und numerisch bewiesen, dass der interplanetare Raum im SubQG kein leeres „Nichts“ ist, sondern ein aktives, kondensiertes Quantennetzwerk mit Phasenüberlappung $w_e \approx 1$. Für Geschwindigkeiten unterhalb der emergenten Grenzgeschwindigkeit $c = 2 J_0 L_0$ verhält sich dieses Vakuum verlustfrei und suprafluid (Reibungswiderstand $F_{\mathrm{drag}} = 0$). Ein frei fliegender Asteroid gleitet geradlinig mit $v = \mathrm{const.}$, während bei der Annäherung an einen Himmelskörper eine rein refraktive Geodätenkrümmung durch Kantenverkürzung $L_e = L_0 e^{x_e} < L_0$ eintritt.
 3. **Orthogonale überlappende Multiversen am selben Ort:** Auf einem gemeinsamen Knotenensemble $\mathcal{V}$ wird gezeigt, dass zwei vollständige 3D-Universen am exakt selben Ort zur selben Zeit existieren können, ohne sich gravitativ oder elektromagnetisch zu beeinflussen, sofern ihre Kantennetzwerke über orthogonale Phasenräume $\langle A | B \rangle = 0$ entkoppelt sind ($E_A \cap E_B = \emptyset$).
 4. **Emergente Universumsentwicklung ohne importierte Astrophysik:** `SubQGUniverseEvolution` startet mit einem relationalen Ereignis ohne räumliche Kante und aktualisiert Knoten, Kanten, Simplexe und interne Zeit ausschließlich über die vorhandene SubQG-Phasendynamik und Energie–Metrik-Rückkopplung. Ein kanonischer Lauf erreicht 2.000 Epochen beziehungsweise zwei Milliarden explizit kalibrierte Anzeigejahre. Er archiviert auch Strukturen, die zunächst unbekannt bleiben. Stern-, Planeten-, Nebel-, Galaxie- und Supernovabezeichnungen sind nachträgliche Signaturhypothesen und keine vorprogrammierten Körperklassen.
-5. **Erweiterte Formelanalyse & formale Lean-4-Verifikation:** Die Lean-Suite umfasst nun drei Dateien mit **75 kernelgeprüften Theoremen**: 34 Sätze zum SubQG-Kern, 23 Formeltheoreme einschließlich aller 20 nummerierten Formeln und 18 Sätze zur Universumsentwicklung. Der gemeinsame Lauf mit **Lean 4.34.1** endet mit Exitcode 0, ohne Warnungen, Fehler oder Beweisabkürzungen wie `sorry`, `admit` oder `sorryAx`.
-6. **Software, Tests & interaktiver Webviewer:** Die Gesamttestsuite umfasst **364 von 364 bestandene JavaScript-Tests**. Zusätzlich bestehen alle 8 internen Langzeitgates des Zwei-Milliarden-Jahre-Laufs. Der `SubQG Universe Explorer` berechnet Live-Snapshots der unveränderten Engine in einem separaten Worker und ermöglicht freien Flug, Zeitnavigation, Zielanflug und die Untersuchung unbekannter Strukturen in einer ausdrücklich nichtphysikalischen visuellen 3D-Einbettung. Seine filmische Morphologie wird deterministisch aus Energie, Kohärenz, Kontraktion, Fluss, Persistenz und den konkurrierenden SubQG-Signaturhypothesen erzeugt; unbekannte Strukturen werden erst nach Erfüllung der mathematischen Auflösungsschwellen als Galaxien-, Nebel-, Kern- oder Orbitalkandidat bezeichnet. Aufgelöste Galaxienkomplexe erscheinen als abgegrenzte Scheiben mit datenabhängiger Armzahl, während Stern- und Orbitalkandidaten als erkennbare Körper statt bloßer Leuchtpunkte dargestellt werden.
+5. **SubQG-Hardware-Lab:** Das eigenständige Repository [`kruemmel-python/SubQG-Hardware-Lab`](https://github.com/kruemmel-python/SubQG-Hardware-Lab) überführt zwei ausdrücklich abgegrenzte Originalsektoren in einen technisch konkret nachbaubaren Analogrechner: ein Wellennetz mit 32 Knoten und 64 analogen $Q/P$-Zuständen sowie ein separates passives Metriknetz mit 102 Kantenzuständen und 632 Kopplungen. KiCad-Schaltpläne und geroutete Leiterplatten, Stücklisten, mechanischer Aufbau, Mess- und Abnahmeverfahren sowie reproduzierbar kompilierbare Raspberry-Pi-Pico-2-Firmware sind vorhanden. Der Stand ist ein simulierter und gerouteter Prototyp; eine physische Platine wurde noch nicht gebaut oder vermessen und der Vollausbau ist noch nicht freigegeben.
+6. **Erweiterte Formelanalyse & formale Lean-4-Verifikation:** Die Lean-Suite umfasst nun drei Dateien mit **79 kernelgeprüften Theoremen**: 34 Sätze zum SubQG-Kern, 23 Formeltheoreme einschließlich aller 20 nummerierten Formeln und 22 Sätze zur Universumsentwicklung. Der gemeinsame Lauf mit **Lean 4.34.1** endet mit Exitcode 0, ohne Warnungen, Fehler oder Beweisabkürzungen wie `sorry`, `admit` oder `sorryAx`.
+7. **Software, Tests & interaktiver Webviewer:** Die Gesamttestsuite umfasst **365 von 365 bestandene JavaScript-Tests**. Zusätzlich bestehen alle 8 internen Langzeitgates des Zwei-Milliarden-Jahre-Laufs. Der `SubQG Universe Explorer` berechnet Live-Snapshots der unveränderten Engine in einem separaten Worker und ermöglicht freien Flug, Zeitnavigation, Zielanflug und die Untersuchung unbekannter Strukturen in einer ausdrücklich nichtphysikalischen visuellen 3D-Einbettung. Seine filmische Morphologie wird deterministisch aus Energie, Kohärenz, Kontraktion, Fluss, Persistenz und den konkurrierenden SubQG-Signaturhypothesen erzeugt; unbekannte Strukturen werden erst nach Erfüllung der mathematischen Auflösungsschwellen als Galaxien-, Nebel-, Kern- oder Orbitalkandidat bezeichnet. Aufgelöste Galaxienkomplexe erscheinen als abgegrenzte Scheiben mit datenabhängiger Armzahl, während Stern- und Orbitalkandidaten als erkennbare Körper statt bloßer Leuchtpunkte dargestellt werden.
 
-**Schlüsselwörter:** SubQG; Genesis; emergente Raumzeit; Universumsentwicklung; unbekannte Strukturen; relationale Zeit; Äquivalenzprinzip; Kantenmetrik; MOND-Crossover; orthogonale Multiversen; Lean 4; formale Verifikation.
+**Schlüsselwörter:** SubQG; Genesis; emergente Raumzeit; Universumsentwicklung; unbekannte Strukturen; relationale Zeit; Äquivalenzprinzip; Kantenmetrik; Analogrechner; Hardware-Labor; MOND-Crossover; orthogonale Multiversen; Lean 4; formale Verifikation.
 
 ---
 
@@ -26,7 +27,7 @@ Subquantum Graphity (SubQG) untersucht, ob sich Raumzeit, interne Uhren, Träghe
 
 Die zentrale Fragestellung lautet: **Wie erzeugen gemeinsame mikroskopische Phasenregeln ein emergentes Raumzeit-Kontinuum, darin persistente und möglicherweise völlig neue Strukturen sowie die konkrete Dynamik makroskopischer Objekte; wie verhalten sich mehrere solche Raumzeiten zueinander, und welche Teile dieser Entwicklung lassen sich maschinell formal verifizieren?**
 
-Zur wissenschaftlichen Exaktheit werden sechs Ebenen strikt getrennt:
+Zur wissenschaftlichen Exaktheit werden neun Ebenen strikt getrennt:
 
 | Ebene | Bedeutung im FPV11-Whitepaper |
 |---|---|
@@ -36,6 +37,8 @@ Zur wissenschaftlichen Exaktheit werden sechs Ebenen strikt getrennt:
 | **Numerischer Befund** | Deterministisch reproduzierte Messwerte aus RK4-Zeitschritt-Integrationen, Graphen-Relaxation, `formula-check`-Rasterproben und statistischen Regressionen. |
 | **Nachträgliche Signaturhypothese** | Revidierbare Einordnung einer entstandenen Struktur als möglicher Stern, Planet, Nebel, galaktischer Komplex oder Phasenfreisetzungsereignis. Die Klassifikation wirkt nicht auf die Dynamik zurück. |
 | **Visualisierung** | Interaktive 3D-WebGL/Cinematic-Darstellungen zur Veranschaulichung der berechneten Zustände (kein Ersatz für mathematische Beweise). |
+| **Hardwareentwurf** | Elektrische Übersetzung ausdrücklich benannter SubQG-Gleichungssektoren in analoge Integrator-, Multiplizierer- und RC-Netze einschließlich EDA-, Firmware- und Abnahmeunterlagen. |
+| **Physische Messung** | Erst nach realem Aufbau, Kalibrierung und bestandener Abnahme zulässige Messdaten; Simulation, SPICE und geroutete Leiterplatten sind noch keine Hardwaremessung. |
 | **Physikalische Hypothese** | Interpretation als mikroskopische Grundlage für die reale Gravitation, Kosmologie ohne Dunkle Materie und Multiplex-Kosmologien. |
 
 ---
@@ -50,7 +53,8 @@ Das FPV11-Projekt führt die bisherigen separaten Stränge in einer einheitliche
 | **Asteroidenflug & Suprafluides Vakuum** | `subqg_cinematic_cosmos.html`, `subqg_apple_experiment.mjs` | Nachweis des widerstandslosen Flugs im kondensierten Quantenvakuum ($F_{\mathrm{drag}} = 0$ für $v < c$), metrische Refraktion an Kantenkontraktionen $L_e = e^{x_e}$. |
 | **Orthogonale Multiplex-Multiversen** | `subqg_dual_multiverse.html`, `subqg_multiverse_phases.mjs` | Koexistenz zweier unabhängiger Raumzeiten auf denselben Knoten $\mathcal{V}$ ohne wechselseitige Licht- oder Gravitationsübertragung durch Kanten-Orthogonalität $\langle A | B \rangle = 0$. |
 | **Emergente Universumsentwicklung** | `subqg_universe_evolution.mjs`, `universe_evolution.test.mjs`, `subqg_universe_2gyr_validation.json` | Raumloser Anfang, append-only Kausalaktualisierung, Zwei-Milliarden-Jahre-Kalibrierung, dauerhaftes Archiv unbekannter Strukturen und nachträgliche Mehrhypothesenanalyse. |
-| **Formale Verifikation & MRE-Engine** | `SubQGDerivation.lean`, `SubQGUniverseEvolution.lean`, `SubQG_Formal_Verification_2026-11-11.lean` | 75 Lean-Theoreme in drei Dateien maschinengeprüft; keine Beweislückenmarker; 18/18 MRE-Engine-Selbsttests bestanden. |
+| **SubQG-Hardware-Lab** | `SubQG-Hardware-Lab/HARDWARE.md`, `hardware/`, `firmware/pico2/`, `BUILD_READINESS.md`, `OBSERVABILITY.md` | Konkrete analoge Repräsentation des festen FPV-Wellensektors und des stationären MicroAction-Metriksektors; 32 Wellenknoten, 64 $Q/P$-Zustände, bis 496 gewichtete Kantenplätze, 102 Metrikzustände und 632 Widerstandskopplungen; Bau-, Mess- und Firmwareunterlagen vorhanden, physische Abnahme noch offen. |
+| **Formale Verifikation & MRE-Engine** | `SubQGDerivation.lean`, `SubQGUniverseEvolution.lean`, `SubQG_Formal_Verification_2026-11-11.lean` | 79 Lean-Theoreme in drei Dateien maschinengeprüft; keine Beweislückenmarker; 18/18 MRE-Engine-Selbsttests bestanden. |
 | **Genesis Master-Simulation** | `subqg_genesis.mjs`, `genesis-results.json` | Selbstorganisation von Dimension ($d \approx 3{,}0$) und Grenzgeschwindigkeit $c$ aus Phasenüberlappungen. |
 | **Galaktische Skalierung & MOND** | `subqg_unified_proof_engine.mjs` | Nichtlineare Graphenleitfähigkeit $\sigma(g) = g / (g + a_0)$, flache Rotationskurven und Tully-Fisher-Skalierung $v^4 \propto M$. |
 
@@ -265,11 +269,114 @@ Alle acht automatisierten Validierungsgates bestehen. Der Lauf belegt damit, das
 
 ---
 
-# 8. Formale Verifikation: MathResearchEngine (`.mreformula`) & Lean 4
+# 8. SubQG-Hardware-Lab: nachbaubare analoge Repräsentation
+
+Das öffentliche Entwicklungsrepository
+[`kruemmel-python/SubQG-Hardware-Lab`](https://github.com/kruemmel-python/SubQG-Hardware-Lab)
+stellt einen konkreten A32-Analogaufbau einschließlich Schaltplänen,
+Leiterplattenlayouts, Stücklisten, mechanischem Aufbau, Kalibrierung,
+Messprotokollen, Abnahmekriterien und Controller-Firmware bereit. „Hardware-Lab“
+bedeutet hier eine technisch spezifizierte, real aufbaubare Laborplattform. Es
+bedeutet zum dokumentierten Stand **nicht**, dass die Platinen bereits gebaut,
+vermessen oder für den Vollausbau freigegeben wurden.
+
+## 8.1 Welche Teile von SubQG physisch dargestellt werden
+
+Der Entwurf übersetzt zwei voneinander getrennte Originalsektoren in
+elektrische Zustände. Er führt keine zusätzliche Dynamik ein, um Lücken
+zwischen diesen Sektoren künstlich zu schließen.
+
+| SubQG-Größe | Analoge Repräsentation | Umfang |
+|---|---|---:|
+| Wellenkoordinate $Q_i$ | Spannung eines Integratorkondensators | 32 Zustände |
+| Konjugierter Zustand $P_i$ | Spannung eines zweiten Integrators | 32 Zustände |
+| Gewichtete feste Graphkante $w_{ij}$ | AD633-Multiplizierer, Gewichtsspannung und symmetrische Summeneinspeisung | bis 496 Paarplätze; 160 im Phasenring-Beispiel |
+| Logarithmische Kantenmetrik $x_e$ beziehungsweise skalierte Größe $X_e$ | Gepufferte Spannung eines passiven RC-Knotens | 102 Zustände |
+| MicroAction-Kopplung zwischen $x_e$ und $x_f$ | Berechneter Widerstand $R_{ef}$ zwischen zwei Metrikzuständen | 632 Kopplungen |
+| Quellterm $J_e$ der stationären Gleichung $Hx=J$ | Gepufferte Quellspannung mit kompensiertem Quellwiderstand | je Metrikzustand |
+
+Das **Wellennetz** stellt damit die kontinuierliche FPV-Wellendynamik auf
+einem ausgewählten festen Graphen dar. Die $Q/P$-Zustände werden nach dem
+Umschalten auf `RUN` von der Analogschaltung fortgeschrieben und nicht durch
+den Mikrocontroller numerisch berechnet. Das **Metriknetz** ist ein separater
+analoger Relaxationssolver für das stationäre MicroAction-Minimum. Seine
+RC-Relaxation reproduziert die Gleichung $Hx=J$; sie beansprucht nicht, die
+Iterationsfolge eines digitalen CG-Solvers oder eine neue fundamentale Zeit
+physisch nachzubilden.
+
+## 8.2 Controller, Firmware und Messkette
+
+Die Firmware für einen nicht drahtlosen Raspberry Pi Pico 2 steuert die
+sicherheitsrelevante Abfolge `HOLD → RUN_ARM → GO`, überwacht E-Stop,
+Versorgungszustand, ADC-Timeout und Watchdog und kann einen 18-Bit-ADC auslösen
+beziehungsweise auslesen. Sie berechnet die analogen $Q/P$-Zustände nicht.
+Der reproduzierbare Build erzeugt eine UF2-Datei und einen Bericht mit
+Quell- und Binärprüfsummen; der reale Flash- und Hardwaretest bleibt bis zur
+physischen Prüfung ausdrücklich offen.
+
+Die Messarchitektur sieht alle 64 schnellen Wellenzustände und alle 102
+langsamen Metrikzustände vor. Rohdaten, Kalibrierung, Temperatur,
+Seriennummern und Prüfsummen werden getrennt archiviert. Ein Vergleich mit der
+Simulation darf keine automatische Zeit-, Phasen- oder Amplitudenanpassung
+verwenden. Dadurch wird ein späterer Messvergleich falsifizierbar.
+
+## 8.3 Nachbauunterlagen und gestufte Abnahme
+
+Zum technischen Paket gehören insbesondere:
+
+- vollständige KiCad-Schaltpläne und geroutete PILOT-2- und
+  Controller-Adapter-Leiterplatten;
+- Stücklisten mit Herstellerteilenummern sowie System-, Kabel-, Netzteil- und
+  Sicherheitskomponenten;
+- mechanische Zeichnungen, Gehäuse, Montageplatten, Abstandshalter,
+  Kabeldurchführungen und separater Experiment-Stopp;
+- Firmware-Quellen, Hosttests, Buildskript und versioniertes UF2-Artefakt;
+- ngspice-Netzlisten, Python-MNA-Referenz, Monte-Carlo-Engineeringprüfung und
+  maschinenlesbare Abnahmegrenzen;
+- eine fünfstufige Inbetriebnahme: Versorgung, Zwei-Knoten-Pilot,
+  Acht-Knoten-Pilot, 32-Knoten-/160-Kanten-Netz und danach Metrikbank
+  beziehungsweise optionaler 496-Kanten-Ausbau.
+
+Der aktuelle Pre-Release `v0.1.0-prototype.1` ist ein Prototypenpaket. Der
+direkte Vollausbau bleibt gesperrt, bis die elektrischen und mechanischen
+Pilotgates mit echten Messdaten bestanden sind.
+
+## 8.4 Wissenschaftliche Aussage und Grenzen
+
+Ein erfolgreich aufgebautes und abgenommenes Labor könnte zeigen, dass reale
+analoge Elektronik die ausgewählten SubQG-Gleichungen innerhalb festgelegter
+Messunsicherheiten als kontinuierliches Zustandsnetz ausführt. Das wäre ein
+Hardware-Äquivalenztest für diese Gleichungssektoren und ein wichtiger Schritt
+über reine Software- und SPICE-Rechnung hinaus.
+
+Es wäre jedoch noch kein unmittelbarer Nachweis, dass die verwendeten
+Elektronikspannungen fundamentale Subquanten, reale Gravitation oder
+entstehende Raumzeit **sind**. Nicht vollständig analog implementiert sind
+insbesondere:
+
+- die laufende Entstehung und Umverdrahtung des Graphen;
+- die gekoppelte gemeinsame Phasen-/Metrikdynamik beider Hardwarebänke;
+- lokale Ereignisuhren, Genesis, Universumsentwicklung und die Gesamtheit der
+  SubQG-Module;
+- eine empirische Übertragung der elektrischen Laborzeit und -spannung auf
+  fundamentale Naturkonstanten.
+
+Auch die rechtliche Nachbaubarkeit ist vom technischen Umfang zu trennen: Die
+Unterlagen sind öffentlich einsehbar, die aktuelle Datei `LICENSE.md` stellt
+Software, Firmware, Schaltpläne, PCB-Designs und Dokumentation jedoch unter
+eine proprietäre Lizenz. Herstellung, Nutzung, Veränderung oder Weitergabe
+erfordern danach eine vorherige schriftliche Genehmigung des Rechteinhabers.
+Ein ohne Einzelgenehmigung frei nachbaubares Open-Hardware-Labor würde daher
+zusätzlich eine entsprechend offene Hardware-, Software- und
+Dokumentationslizenz benötigen.
+
+---
+
+# 9. Formale Verifikation: MathResearchEngine (`.mreformula`) & Lean 4
 
 Ein entscheidender wissenschaftlicher Fortschritt in FPV11 ist die vollständige formale und maschinelle Absicherung der mathematischen Gleichungen gegen logische Zirkelschlüsse und numerische Artefakte.
 
-## 8.1 Das dreistufige Verifikationssystem
+## 9.1 Das dreistufige Verifikationssystem
 
 ```mermaid
 flowchart TD
@@ -282,7 +389,7 @@ flowchart TD
 2. **Numerische Raster- und Zufallsprüfung:** `math_research_v03.exe` wertet jede Formel an 121 festen Gitterpunkten und 40 deterministischen Zufallspunkten (`seed: 42`) unabhängig auf linker und rechter Seite aus.
 3. **Axiomatische Lean-4-Verifikation:** Die Theoreme sind auf `SubQGDerivation.lean`, `SubQGUniverseEvolution.lean` und `SubQG_Formal_Verification_2026-11-11.lean` verteilt und werden durch Lean und Mathlib kernelgeprüft.
 
-## 8.2 Übersicht der kanonischen Formeln 01–20 & Lean-Theoreme
+## 9.2 Übersicht der kanonischen Formeln 01–20 & Lean-Theoreme
 
 | Nr. | Formel im `.mreformula`-Format | Mathematische & Physikalische Bedeutung | MRE-Rasterprüfung | Lean-4-Theorem & Taktik |
 |---:|---|---|:---:|---|
@@ -307,35 +414,36 @@ flowchart TD
 | **19** | `(x+y)^2 = x^2+y^2` | **Gegenbeispiel:** Unentkoppelte Multiversum-Kreuzkraft | **Widerlegt** bei Punkt 1 ($x=-10, y=-10$) | `formula19_cross_force_counterexample` (`norm_num`) |
 | **20** | `(x+y)^2 - 2*(x^2+y^2) + (x-y)^2 = 0` | Transientes Tunnel-Kopplungs-Theorem (Orthogonalitätsstörung $\Delta\theta \to 0$) | 161 Punkte | `formula20_transient_tunneling_invariance` (`ring`) |
 
-## 8.3 Zusätzliche Formeln und Gesamtaudit
+## 9.3 Zusätzliche Formeln und Gesamtaudit
 Der historische 28-Dateien-Audit umfasste die damalige kanonische Reihe 01–19 und 9 historische beziehungsweise erweiterte Dateien. Formel 20 wurde anschließend als neue kanonische Tunnel-Kopplungsinvarianz ergänzt und ist ebenfalls formal verifiziert. Zu den Zusatzkontrollen gehören:
 * `extra_binomial` (`(x+y)^2 = x^2 + 2xy + y^2`) – formal verifiziert.
 * `extra_graph_dispersion` (`(x+y)(x-y) = x^2 - y^2`) – formal verifiziert.
 * `extra_mond_crossover` (`x*(x/(x+y)) = x^2/(x+y)`) – formal verifiziert.
 * 6 wortgleiche historische Dubletten – vollständig durch die kanonischen Theoreme abgedeckt.
 
-## 8.4 Lean-4-Kompilierungsergebnis
+## 9.4 Lean-4-Kompilierungsergebnis
 Die drei formalen Verifikationsdateien wurden gemeinsam mit Lean 4.34.1 kompiliert:
 * **Exitcode:** 0
 * **Warnungen:** 0
 * **Fehler:** 0
 * **Verbotene Beweisabkürzungen (`sorry`, `admit`, `sorryAx`):** 0 (keine verwendet)
-* **Kernelgeprüfte Theoreme:** 75 insgesamt, davon 18 Invarianten der Universumsentwicklung
+* **Kernelgeprüfte Theoreme:** 79 insgesamt, davon 22 Invarianten der Universumsentwicklung
 * **Geprüfte Axiome:** Ausschließlich die Standardaxiome der intuitionistischen/klassischen Logik (`propext`, `Classical.choice`, `Quot.sound`).
 
 Zusätzlich absolvierte die MathResearchEngine ihre vollständige interne **18-Punkte-Selbstprüfung (`selftest`) mit 18 von 18 bestandenen Tests** (darunter semantische Lean-Extraktion, Typkompatibilität, Erkennung ungültiger Formeln und Ablehnung unbewiesener Kandidaten).
 
 ---
 
-# 9. Reproduzierbarkeit und Verifikationsumfang
+# 10. Reproduzierbarkeit und Verifikationsumfang
 
 | Verifikationsschritt | Auszuführender Befehl | Befund in FPV11 |
 |---|---|---|
-| **Gesamte Node.js Testsuite** | `npm test` | **364 von 364 Tests bestanden** |
+| **Gesamte Node.js Testsuite** | `npm test` | **365 von 365 Tests bestanden** |
 | **SubQG Apfel-Experiment Suite** | `node src/index.mjs --apple` | **Alle 6 Gates bestanden**, $\eta_{\max} = 0{,}0255\,\%$, $R^2 = 0{,}999994$ |
 | **Universumsentwicklung (2 Mrd. Anzeigejahre)** | `npm run validation:universe-2gyr` | **8 von 8 Gates bestanden**, einschließlich Determinismus, Endlichkeit, Kausalität und unbekannter Strukturen |
 | **MRE Formel-Check (28 Dateien)** | `math_research_v03.exe formula-check <datei>` | **23 Identitäten überstanden, 5 Gegenbeispiele erkannt** |
-| **Formale Lean-4-Kompilierung** | `npm run verify:lean` | **75 Theoreme in 3 Dateien; Exitcode 0, 0 Fehler, 0 Warnungen, keine Beweislückenmarker** |
+| **Formale Lean-4-Kompilierung** | `npm run verify:lean` | **79 Theoreme in 3 Dateien; Exitcode 0, 0 Fehler, 0 Warnungen, keine Beweislückenmarker** |
+| **SubQG-Hardware-Lab** | `SubQG-Hardware-Lab/BUILD_READINESS.md` und `firmware/pico2/` | Gerouteter, rechnerisch und per SPICE geprüfter Prototyp; Firmware-Build reproduzierbar; physischer Aufbau, Messung und Vollausbau-Freigabe noch offen |
 | **MRE Engine Selbstprüfung** | `math_research_v03.exe selftest <temp-dir>` | **18 von 18 internen Systemtests bestanden** |
 | **Bestehender Cinematic 3D Cosmos Viewer** | `viewer/subqg_cinematic_cosmos.html` | Interaktiver Asteroidenflug & Quantenvakuum |
 | **Bestehender Dual Multiverse 3D Viewer** | `viewer/subqg_dual_multiverse.html` | Interaktive überlappende Multiplex-Universen |
@@ -345,7 +453,7 @@ GitHub-Repository: `https://github.com/kruemmel-python/sub-quanten-gravitation` 
 
 ---
 
-# 10. Schlussfolgerung und wissenschaftliche Einordnung
+# 11. Schlussfolgerung und wissenschaftliche Einordnung
 
 Das erweiterte FPV11-Whitepaper schließt die Lücke zwischen der theoretischen Netzwerk-Nukleation und der mathematisch-mechanischen Realität:
 
@@ -353,7 +461,8 @@ Das erweiterte FPV11-Whitepaper schließt die Lücke zwischen der theoretischen 
 2. **Das Vakuum ist ein aktiver Raumzeit-Träger:** Freier Flug ohne Reibung existiert, weil das kondensierte Quantenvakuum ein verlustfreier, suprafluider Grundzustand ist.
 3. **Multiplex-Geometrie erklärt überlappende Welten:** Mehrere unabhängige Universen können denselben fundamentalen Satz an Subquanten-Knoten teilen, ohne kollidierende Kräfte oder Lichtsignale auszutauschen, sofern ihre Kantennetzwerke über orthogonale Phasenräume entkoppelt sind.
 4. **Universen können als aktualisierte Netzwerksektoren untersucht werden:** Die neue Engine erzeugt relationale Zeit, persistente Strukturen und vorsichtig klassifizierte Kandidaten ausschließlich aus der SubQG-Netzwerkdynamik; unbekannte Ergebnisse bleiben ausdrücklich erhalten.
-5. **Maschinell geprüfte interne Konsistenz:** Durch reproduzierbare Engine-Berechnung und 75 Lean-Theoreme sind die formalisierten algebraischen Aussagen und Softwareinvarianten maschinengeprüft. Lean beweist dabei die angegebenen Sätze aus ihren Voraussetzungen, nicht die empirische Wahrheit sämtlicher physikalischer Voraussetzungen.
+5. **Ausgewählte Gleichungssektoren sind als Analoghardware spezifiziert:** Das Hardware-Lab bildet $Q/P$-Wellendynamik und das stationäre MicroAction-Metrikminimum auf konkrete elektrische Zustände und Kopplungen ab. Erst ein gebauter, kalibrierter und bestandener Pilot liefert reale Hardwaremessdaten; der gegenwärtige EDA-, Firmware- und Simulationsstand darf damit nicht verwechselt werden.
+6. **Maschinell geprüfte interne Konsistenz:** Durch reproduzierbare Engine-Berechnung und 79 Lean-Theoreme sind die formalisierten algebraischen Aussagen und Softwareinvarianten maschinengeprüft. Lean beweist dabei die angegebenen Sätze aus ihren Voraussetzungen, nicht die empirische Wahrheit sämtlicher physikalischer Voraussetzungen.
 
 Damit liegt eine reproduzierbare und formal abgesicherte Forschungsplattform für emergente Quantengravitation und Universumsbildung vor. Ob die emergenten Kandidaten reale kosmische Systeme quantitativ beschreiben, muss durch weitere SubQG-interne Ableitungen, Skalierungsstudien und unabhängige empirische Tests entschieden werden.
 
@@ -365,7 +474,7 @@ Damit liegt eine reproduzierbare und formal abgesicherte Forschungsplattform fü
 - `SUBQG_FORMELANALYSEBERICHT_ERWEITERT_2026-11-11.md`: Vollständiger 425-Zeilen-Analysebericht der 28 Formeldateien mit mathematischen Herleitungen und Ausführungsprotokollen.
 - `docs/SubQG_Formal_Verification_2026-11-11.lean`: Lean-4-Beweisdatei für die nummerierten Formeln und Zusatzformeln ohne `sorry`.
 - `formal/SubQGDerivation.lean`: Formale Ableitungen des SubQG-Kerns.
-- `formal/SubQGUniverseEvolution.lean`: 18 formale Invarianten der emergenten Universumsentwicklung.
+- `formal/SubQGUniverseEvolution.lean`: 22 formale Invarianten der emergenten Universumsentwicklung.
 - `docs/SUBQG_UNIVERSE_LEAN_BERICHT.md`, `docs/LEAN_VERIFIKATIONSBERICHT.md`: Vollständige Lean-Prüfberichte.
 - `mre_formulas/`: Kanonische `.mreformula`-Dateien und Zusatzdateien.
 - `src/modules/subqg_genesis.mjs`: Zustandsensemble, Graphbildung, Felddynamik und Genesis-Messverfahren.
@@ -375,4 +484,6 @@ Damit liegt eine reproduzierbare und formal abgesicherte Forschungsplattform fü
 - `viewer/subqg_universe_explorer.html`: Interaktiver Flug durch Live-Snapshots der SubQG-Universumsentwicklung.
 - `viewer/subqg_cinematic_cosmos.html`: 3D-Simulation des Asteroidenflugs und des suprafluiden Vakuums.
 - `viewer/subqg_dual_multiverse.html`: 3D-Simulation der orthogonal überlappenden Multiversen.
-- `tests/apple_experiment.test.mjs`, `tests/*.test.mjs`: Vollständige Testsuite (364 Tests).
+- [`kruemmel-python/SubQG-Hardware-Lab`](https://github.com/kruemmel-python/SubQG-Hardware-Lab): Eigenständiger A32-Analoghardware-Entwurf mit KiCad, Stücklisten, Aufbau-, Mess- und Abnahmeunterlagen sowie Pico-2-Firmware.
+- `SubQG-Hardware-Lab/HARDWARE.md`, `BUILD_READINESS.md`, `OBSERVABILITY.md`, `firmware/pico2/README.md`: Primärunterlagen zur physikalischen Repräsentation, Freigabe und Messkette.
+- `tests/apple_experiment.test.mjs`, `tests/*.test.mjs`: Vollständige Testsuite (365 Tests).
