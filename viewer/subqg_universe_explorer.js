@@ -9,6 +9,7 @@ const EPOCH_YEARS = 1_000_000;
 
 const dom = {
   intro: $('#intro'), begin: $('#beginExperience'), enterFlight: $('#enterFlight'),
+  enterImmersive: $('#enterImmersive'), exitImmersive: $('#exitImmersive'), immersiveHud: $('#immersiveHud'),
   age: $('#ageValue'), clock: $('#clockValue'), nodes: $('#nodeValue'), engine: $('#engineValue'),
   engineLight: $('#engineLight'), stage: $('#stageValue'), timeline: $('#ageTimeline'),
   play: $('#playSimulation'), reset: $('#resetSimulation'), simulationSpeed: $('#simulationSpeed'),
@@ -46,6 +47,8 @@ const state = {
   previousCamera: { x: 0, y: 28, z: 490 },
   cameraUserControlled: false,
   autoFramedTargetId: null,
+  immersive: false,
+  immersiveHintTimer: 0,
   lastFrame: performance.now(),
   toastTimer: 0
 };
@@ -889,6 +892,41 @@ function requestFlightPointerLock() {
   }
 }
 
+function setImmersiveUi(active) {
+  state.immersive = active;
+  document.body.classList.toggle('immersive', active);
+  dom.enterImmersive.setAttribute('aria-pressed', String(active));
+  clearTimeout(state.immersiveHintTimer);
+  dom.immersiveHud.classList.toggle('visible', active);
+  if (active) {
+    state.immersiveHintTimer = setTimeout(() => dom.immersiveHud.classList.remove('visible'), 4200);
+  }
+  resize();
+}
+
+async function enterImmersiveMode() {
+  setImmersiveUi(true);
+  state.cameraUserControlled = true;
+  try {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+      await document.documentElement.requestFullscreen({ navigationUI: 'hide' });
+    }
+  } catch {
+    showToast('Browser-Vollbild blockiert · ablenkungsfreier User Mode ist trotzdem aktiv');
+  }
+  requestFlightPointerLock();
+}
+
+function exitImmersiveMode() {
+  if (!state.immersive) return;
+  setImmersiveUi(false);
+  if (document.pointerLockElement && document.exitPointerLock) document.exitPointerLock();
+  if (document.fullscreenElement && document.exitFullscreen) {
+    document.exitFullscreen().catch(() => {});
+  }
+  showToast('User Mode beendet');
+}
+
 worker.addEventListener('message', event => {
   const message = event.data ?? {};
   if (message.type === 'snapshot') {
@@ -921,6 +959,8 @@ dom.begin.addEventListener('click', () => {
   showToast('Genesis geladen · starte die Zeit oder fliege frei');
 });
 dom.enterFlight.addEventListener('click', requestFlightPointerLock);
+dom.enterImmersive.addEventListener('click', enterImmersiveMode);
+dom.exitImmersive.addEventListener('click', exitImmersiveMode);
 dom.play.addEventListener('click', () => setPlaying(!state.playing));
 dom.reset.addEventListener('click', () => {
   setPlaying(false);
@@ -1012,6 +1052,15 @@ canvas.addEventListener('wheel', event => {
 }, { passive: false });
 
 window.addEventListener('keydown', event => {
+  if (event.code === 'KeyU') {
+    event.preventDefault();
+    if (state.immersive) exitImmersiveMode(); else enterImmersiveMode();
+    return;
+  }
+  if (event.code === 'Escape' && state.immersive) {
+    exitImmersiveMode();
+    return;
+  }
   if (/^(Key[WASDQE]|ShiftLeft|ShiftRight)$/.test(event.code)) {
     event.preventDefault();
     state.keys.add(event.code);
@@ -1028,6 +1077,10 @@ document.addEventListener('pointerlockchange', () => {
   state.hovered = null;
   dom.enterFlight.textContent = active ? 'Flugsteuerung aktiv · ESC zum Lösen' : '⌖ Flugsteuerung aktivieren';
   if (active) showToast('Flugmodus: Linksklick erfasst das Ziel im Fadenkreuz');
+});
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement && state.immersive) setImmersiveUi(false);
+  resize();
 });
 window.addEventListener('resize', resize);
 

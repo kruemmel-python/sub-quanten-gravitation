@@ -32,6 +32,7 @@
     <section>
       <p class="section-label">FLUGMODUS</p>
       <button id="enterFlight" class="primary wide"><span class="crosshair">⌖</span> Flugsteuerung aktivieren</button>
+      <button id="enterImmersive" class="secondary wide immersive-launch" aria-pressed="false"><span>⛶</span> Universum im Vollbild</button>
       <div class="control-grid">
         <kbd>W</kbd><span>Vorwärts</span><kbd>S</kbd><span>Rückwärts</span>
         <kbd>A D</kbd><span>Seitwärts</span><kbd>Q E</kbd><span>Sinken / Steigen</span>
@@ -91,6 +92,11 @@
   </aside>
 
   <div id="flightReticle" class="reticle" aria-hidden="true"><i></i><i></i><span></span></div>
+  <div id="immersiveHud" class="immersive-hud" aria-live="polite">
+    <span>SUBQG · USER MODE</span>
+    <small>WASD · Maus · Umschalt Boost · U oder Esc beendet</small>
+    <button id="exitImmersive" type="button" aria-label="Vollbild-Flugmodus beenden">Vollbild verlassen</button>
+  </div>
   <div id="targetLabel" class="target-label" hidden></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 

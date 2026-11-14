@@ -339,7 +339,7 @@ Zusätzlich absolvierte die MathResearchEngine ihre vollständige interne **18-P
 | **MRE Engine Selbstprüfung** | `math_research_v03.exe selftest <temp-dir>` | **18 von 18 internen Systemtests bestanden** |
 | **Bestehender Cinematic 3D Cosmos Viewer** | `viewer/subqg_cinematic_cosmos.html` | Interaktiver Asteroidenflug & Quantenvakuum |
 | **Bestehender Dual Multiverse 3D Viewer** | `viewer/subqg_dual_multiverse.html` | Interaktive überlappende Multiplex-Universen |
-| **SubQG Universe Explorer** | `npm run viewer:universe` | Worker-basierter Live-Lauf, datenabhängige filmische Morphologie, freier 3D-Flug, Zeitnavigation und rückwirkungsfreie Mehrhypothesenanalyse |
+| **SubQG Universe Explorer** | `npm run viewer:universe` | Worker-basierter Live-Lauf, datenabhängige filmische Morphologie, freier 3D-Flug einschließlich ablenkungsfreiem Vollbild-User-Mode, Zeitnavigation und rückwirkungsfreie Mehrhypothesenanalyse |
 
 GitHub-Repository: `https://github.com/kruemmel-python/sub-quanten-gravitation` (öffentlicher Stand auf Branch `main`).
 

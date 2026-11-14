@@ -173,6 +173,9 @@ Bedienung:
 - Anklicken oder Katalogauswahl für Rohmesswerte und konkurrierende
   Signaturhypothesen;
 - „Ziel anfliegen“ für einen sanften visuellen Autopiloten.
+- „Universum im Vollbild“ oder `U` für den ablenkungsfreien `USER MODE`, in
+  dem alle Analyse- und Zeitpanels verschwinden; `U` oder `Esc` kehrt zur
+  vollständigen Oberfläche zurück.
 
 ### Mathematische Bindung der filmischen Ansicht
 

@@ -31,6 +31,8 @@ dokumentiert.
   Staubbahnen, feste Sternkörper, beleuchtete Orbitalkörper sowie automatische
   Erstausrichtung auf den ersten aufgelösten Galaxienkomplex statt einer von
   Bloom dominierten technischen Punktwolke.
+- ablenkungsfreier `USER MODE` mit Browser-Vollbild, ausgeblendeten Panels,
+  Mausflug, Fadenkreuzsteuerung und Rückkehr über `U` oder `Esc`.
 
 ## 1.0.0 – 2026-11-13
 

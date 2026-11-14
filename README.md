@@ -134,6 +134,11 @@ Strahlungskerne als feste Sternkörper und Orbitalkandidaten als beleuchtete
 Körper. Die erste aufgelöste Galaxie wird einmalig automatisch eingerahmt;
 danach übernimmt ausschließlich der Nutzer die Kamera.
 
+Der `USER MODE` schaltet den Explorer auf einen ablenkungsfreien Vollbildflug:
+Alle Panels und die Zeitleiste verschwinden, während Universum, Fadenkreuz und
+Flugsteuerung aktiv bleiben. Der Modus wird über „Universum im Vollbild“ oder
+die Taste `U` gestartet und mit `U` beziehungsweise `Esc` beendet.
+
 **Öffentlicher Viewer:**
 [SubQG Universe Explorer starten](https://kruemmel-python.github.io/sub-quanten-gravitation/)
 

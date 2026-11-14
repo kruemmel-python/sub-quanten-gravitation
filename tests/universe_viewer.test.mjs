@@ -13,7 +13,7 @@ const paths = {
 
 test('universe explorer exposes the flight and time controls', async () => {
   const html = await readFile(paths.html, 'utf8');
-  for (const id of ['universe', 'enterFlight', 'playSimulation', 'ageTimeline', 'targetCatalog', 'flyToTarget', 'toggleCinematic']) {
+  for (const id of ['universe', 'enterFlight', 'enterImmersive', 'exitImmersive', 'playSimulation', 'ageTimeline', 'targetCatalog', 'flyToTarget', 'toggleCinematic']) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
   assert.match(html, /type="module" src="\.\/subqg_universe_explorer\.js"/);
@@ -39,6 +39,10 @@ test('viewer supports free flight, target selection and responsive presentation'
   for (const control of ['KeyW', 'KeyS', 'KeyA', 'KeyD', 'KeyQ', 'KeyE']) assert.match(client, new RegExp(control));
   assert.match(client, /requestPointerLock/);
   assert.match(client, /function requestFlightPointerLock/);
+  assert.match(client, /function enterImmersiveMode/);
+  assert.match(client, /function exitImmersiveMode/);
+  assert.match(client, /requestFullscreen/);
+  assert.match(client, /fullscreenchange/);
   assert.match(client, /direkte Zielklicks bleiben aktiv/);
   assert.match(client, /state\.autopilot/);
   assert.match(client, /function pickTargetAt/);
@@ -55,6 +59,7 @@ test('viewer supports free flight, target selection and responsive presentation'
   assert.match(client, /evidenceConfidence\(data, 'nebula_candidate'\)/);
   assert.match(client, /SUBQG-AUFGELÖST/);
   assert.match(css, /@media \(max-width: 760px\)/);
+  assert.match(css, /body\.immersive \.topbar/);
 });
 
 test('local viewer server restricts files to viewer and source modules', async () => {
