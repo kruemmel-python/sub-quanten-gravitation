@@ -101,6 +101,29 @@ test('multi-scale complexes retain competing galaxy, nebula, and unknown interpr
   assert(interpretations.includes('galaxy_candidate'));
   assert(interpretations.includes('nebula_candidate'));
   assert(Number.isFinite(complex.analysis.unknownConfidence));
+  assert.equal(complex.formation.source, 'measured_from_subqg_phase_network');
+  assert.equal(complex.formation.network.allMembersConnected, true);
+  assert(complex.formation.network.memberPaths.every(path => path.nodes.length > 0));
+  assert(Number.isFinite(complex.formation.galaxyScore));
+});
+
+test('planet candidates expose their actual SubQG host path and formation trigger', () => {
+  const universe = new SubQGUniverseEvolution({
+    stateCount: 160,
+    seed: 42,
+    epochYears: 1_000_000,
+    observationStride: 20
+  });
+  const snapshot = universe.evolveToAge(2_000_000_000);
+  const planet = snapshot.objects.find(object => object.interpretation === 'planet_candidate');
+  assert(planet, 'A canonical planet candidate must be available');
+  assert(planet.formation.orbitalTrigger);
+  assert.equal(planet.formation.network.networkNodeActive, true);
+  assert.equal(planet.formation.network.connectedToHost, true);
+  assert.equal(planet.formation.network.hostHops, planet.hostDistance);
+  assert.equal(planet.formation.network.hostPath[0], planet.peakNode);
+  assert(planet.formation.network.hostPath.length > 1);
+  assert(planet.formation.network.containingComplexIds.length > 0);
 });
 
 test('canonical SubQG universe reaches two billion calibrated years stably', () => {

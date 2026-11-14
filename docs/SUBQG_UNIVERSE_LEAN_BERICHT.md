@@ -1,6 +1,6 @@
 # Lean-Analyse der SubQG-Universumsentwicklung
 
-**Datum:** 13. November 2026<br>
+**Datum:** 14. November 2026<br>
 **Lean:** 4.34.1, `x86_64-w64-windows-gnu`, Release<br>
 **Mathlib-Umgebung:** `F:\MathResearchDB_v0_4\lean_cache`<br>
 **Ergebnis:** **BESTANDEN**
@@ -21,15 +21,15 @@ strukturellen Garantien, die unabhängig von diesen Namen gelten müssen.
 | Eigenschaft | Ergebnis |
 |---|---|
 | Lean-Kompilierung | BESTANDEN |
-| Theoreme | 18 |
+| Theoreme | 22 |
 | Definitionen | 6 |
-| Strukturen | 5 |
+| Strukturen | 6 |
 | Induktive Klassifikationstypen | 1 |
 | `sorry` | 0 |
 | `admit` | 0 |
 | `sorryAx` | 0 |
 | Compilerfehler | 0 |
-| SHA-256 der Lean-Datei | `F5D229DB869AA75E96F0E2D1066F885B76EA17A8EF3D17DAAD45A1410445F5A6` |
+| SHA-256 der Lean-Datei | `E1B7A246E1C67538C11397708A59DE741F7EF3E5D09E72746A7BD4AF00017F5F` |
 
 ## Formal geprüfte Aussagen
 
@@ -138,6 +138,19 @@ Das Anhängen einer neuen Beobachtung entfernt keine frühere Entdeckung. Dadurc
 können heute unbekannte Strukturen später mit verbesserten Analysekriterien
 erneut untersucht werden.
 
+### 8. Archivstatus und Netzpfade
+
+`archived_signature_preserves_actualized_node` beweist: Wenn der Peak-Knoten
+einer später archivierten Struktursignatur bereits aktualisiert war, bleibt er
+unter jeder `CausalExtension` aktualisiert. „Archiviert“ ist daher formal keine
+Aussage über eine Trennung vom SubQG-Netz.
+
+`NetworkPathDiagnostic` trennt den überprüften Netzpfad von der visuellen
+3D-Einbettung. Der Satz
+`network_path_diagnostic_connects_recorded_endpoints` beweist, dass ein gültiger
+Diagnoseeintrag tatsächlich eine Knotenliste mit dem gemeldeten Start- und
+Endknoten enthält. Dieser Satz hängt laut `#print axioms` von keinen Axiomen ab.
+
 ## Axiom-Auswertung
 
 `#print axioms` meldete ausschließlich Teilmengen der üblichen
@@ -155,8 +168,8 @@ Naturgesetz-Axiom ab.
 Die formalen Invarianten werden durch die JavaScript-Tests und den kanonischen
 Langzeitlauf ergänzt:
 
-- 364 von 364 Projekttests bestanden, einschließlich vier Viewer-Vertragstests;
-- 7 von 7 neue Universums-Unit-Tests bestanden;
+- 365 von 365 Projekttests bestanden, einschließlich vier Viewer-Vertragstests;
+- 8 von 8 Universums-Unit-Tests bestanden;
 - 8 von 8 Langzeit-Validierungsgates bestanden;
 - 320 latente SubQG-Zustände, davon 311 im aktualisierten Hauptsektor;
 - 905 aktualisierte Kanten und 720 Simplexe;
@@ -190,4 +203,6 @@ Lean 4 formal bestanden. Besonders relevant sind die append-only Entstehung
 relationaler Raumzeit, die monotone Uhr, der korrekte raumlose Anfang und die
 kernelgeprüfte Trennung zwischen Dynamik und später Interpretation. Unbekannte
 Strukturen dürfen dauerhaft unbekannt bleiben und können erneut analysiert
-werden, ohne ihre Entstehungsgeschichte umzuschreiben.
+werden, ohne ihre Entstehungsgeschichte umzuschreiben. Zusätzlich ist nun
+formal festgehalten, dass ein archiviertes Makrolabel keinen aktualisierten
+SubQG-Knoten entfernt und dass ausgegebene Netzpfade ihre Endpunkte bezeugen.

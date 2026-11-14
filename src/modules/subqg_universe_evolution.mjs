@@ -357,6 +357,37 @@ export class SubQGUniverseEvolution {
     return Infinity;
   }
 
+  _shortestActivePath(source, target, limit = 64) {
+    if (!this.activeNodes.has(source) || !this.activeNodes.has(target)) {
+      return { connected: false, hops: null, nodes: [] };
+    }
+    if (source === target) return { connected: true, hops: 0, nodes: [source] };
+    const distance = new Int32Array(this.genesis.N).fill(-1);
+    const previous = new Int32Array(this.genesis.N).fill(-1);
+    distance[source] = 0;
+    const queue = [source];
+    for (let head = 0; head < queue.length; head++) {
+      const node = queue[head];
+      if (distance[node] >= limit) continue;
+      for (const neighbor of this.genesis.adj[node]) {
+        if (!this.activeNodes.has(neighbor) || distance[neighbor] >= 0) continue;
+        distance[neighbor] = distance[node] + 1;
+        previous[neighbor] = node;
+        if (neighbor === target) {
+          const nodes = [target];
+          for (let current = target; current !== source;) {
+            current = previous[current];
+            nodes.push(current);
+          }
+          nodes.reverse();
+          return { connected: true, hops: distance[target], nodes };
+        }
+        queue.push(neighbor);
+      }
+    }
+    return { connected: false, hops: null, nodes: [] };
+  }
+
   _observeEmergentStructures() {
     const observables = this._nodeObservables();
     const basins = this._gradientBasins(observables);
@@ -415,6 +446,16 @@ export class SubQGUniverseEvolution {
 
       if (previousClassification !== 'EMERGENT_RADIANT_CORE' &&
           track.classification === 'EMERGENT_RADIANT_CORE') {
+        track.radiantFormation = {
+          energy: track.totalEnergy,
+          radiantThreshold,
+          coherence: track.meanCoherence,
+          requiredCoherence: 0.45,
+          nodeCount: track.nodeCount,
+          requiredNodeCount: 2,
+          persistence: track.persistence,
+          requiredPersistence: 3
+        };
         this._recordEvent('RADIANT_CORE_IGNITION', {
           objectId: track.id,
           peakNode: track.peakNode,
@@ -453,6 +494,18 @@ export class SubQGUniverseEvolution {
         track.interpretation = 'planet_candidate';
         track.hostObjectId = host.id;
         track.hostDistance = hostDistance;
+        track.orbitalFormation = {
+          hostObjectId: host.id,
+          hostDistance,
+          energyRatio,
+          minimumEnergyRatio: 0.001,
+          maximumEnergyRatio: 0.55,
+          phaseCurrent: track.phaseCurrent,
+          currentThreshold: 0.25 * currentThreshold,
+          distanceSpread,
+          maximumDistanceSpread: 2,
+          requiredPersistence: 4
+        };
         if (!wasOrbital) {
           this._recordEvent('ORBITAL_BINDING_DETECTED', {
             objectId: track.id,
@@ -707,6 +760,87 @@ export class SubQGUniverseEvolution {
     throw new RangeError(`Unknown emergent structure: ${id}`);
   }
 
+  _objectFormationDiagnostic(track) {
+    const objectActive = track.lastSeenAgeYears === this.ageYears;
+    const networkNodeActive = this.activeNodes.has(track.peakNode);
+    const directNeighbors = networkNodeActive
+      ? this.genesis.adj[track.peakNode].filter(node => this.activeNodes.has(node)).sort((a, b) => a - b)
+      : [];
+    const seedPath = networkNodeActive
+      ? this._shortestActivePath(track.peakNode, this.seedNode, this.genesis.N)
+      : { connected: false, hops: null, nodes: [] };
+    const host = track.hostObjectId
+      ? [...this.objectTracks.values()].find(candidate => candidate.id === track.hostObjectId)
+      : null;
+    const hostPath = host && networkNodeActive
+      ? this._shortestActivePath(track.peakNode, host.peakNode, this.genesis.N)
+      : { connected: false, hops: null, nodes: [] };
+    const containingComplexIds = [...this.complexTracks.values()]
+      .filter(complex => (complex.memberObjectIds ?? []).includes(track.id))
+      .map(complex => complex.id)
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    const mechanism = track.hostObjectId
+      ? 'Ein persistentes, energieärmeres Gradientenbecken hielt einen begrenzten relationalen Abstand zu einem strahlenden Kern und trug einen Phasenstrom.'
+      : track.classification === 'EMERGENT_RADIANT_CORE'
+        ? 'Ein lokales Maximum der SubQG-Kompaktheit blieb kohärent, kontrahiert und energiereich über mehrere Beobachtungen bestehen.'
+        : 'Ein lokales Maximum der SubQG-Kompaktheit bildete ein persistentes Gradientenbecken; seine makroskopische Deutung bleibt offen.';
+    return {
+      source: 'measured_from_subqg_phase_network',
+      mechanism,
+      basinRule: 'Gradientenfluss zu einem lokalen Kompaktheitsmaximum oberhalb des 62%-Quantils',
+      radiantTrigger: track.radiantFormation ?? null,
+      orbitalTrigger: track.orbitalFormation ?? null,
+      network: {
+        objectActive,
+        networkNodeActive,
+        peakNode: track.peakNode,
+        directDegree: directNeighbors.length,
+        directNeighbors,
+        connectedToGenesis: seedPath.connected,
+        genesisHops: seedPath.hops,
+        genesisPath: seedPath.nodes,
+        hostObjectId: host?.id ?? null,
+        hostPeakNode: host?.peakNode ?? null,
+        connectedToHost: hostPath.connected,
+        hostHops: hostPath.hops,
+        hostPath: hostPath.nodes,
+        containingComplexIds
+      }
+    };
+  }
+
+  _complexFormationDiagnostic(complex) {
+    const members = (complex.memberObjectIds ?? [])
+      .map(id => [...this.objectTracks.values()].find(track => track.id === id))
+      .filter(Boolean);
+    const memberPaths = members.map(member => ({
+      objectId: member.id,
+      peakNode: member.peakNode,
+      ...this._shortestActivePath(complex.anchorNode, member.peakNode, this.genesis.N)
+    }));
+    const persistenceScore = clamp(complex.persistence / 6.0, 0.0, 1.0);
+    const scoreComponents = {
+      membership: 0.15 * clamp(complex.memberCount / 8.0, 0.0, 1.0),
+      radiantCores: 0.30 * clamp(complex.radiantCoreCount / 2.0, 0.0, 1.0),
+      orbitalBodies: 0.25 * clamp(complex.orbitalBodyCount / 3.0, 0.0, 1.0),
+      coherence: 0.15 * complex.meanCoherence,
+      persistence: 0.15 * persistenceScore
+    };
+    return {
+      source: 'measured_from_subqg_phase_network',
+      mechanism: 'Persistente Objektbecken bildeten im aktualisierten Phasennetz eine gemeinsame relationale Komponente; erst danach wurde die Galaxien-Hypothese bewertet.',
+      groupingRule: 'Objekte gehören zum selben Komplex, wenn ihre Peak-Knoten über höchstens 8 aktive Netz-Hops gekoppelt sind.',
+      galaxyScoreComponents: scoreComponents,
+      galaxyScore: Object.values(scoreComponents).reduce((sum, value) => sum + value, 0.0),
+      network: {
+        anchorNode: complex.anchorNode,
+        memberPaths,
+        allMembersConnected: memberPaths.length > 0 && memberPaths.every(path => path.connected),
+        maximumMemberHops: memberPaths.reduce((maximum, path) => Math.max(maximum, path.hops ?? 0), 0)
+      }
+    };
+  }
+
   _totalExcitationEnergy() {
     let total = 0.0;
     const observables = this._nodeObservables();
@@ -811,7 +945,8 @@ export class SubQGUniverseEvolution {
         hostObjectId: track.hostObjectId ?? null,
         hostDistance: track.hostDistance ?? null,
         releaseEvents: track.releaseEvents,
-        analysis: this._analyzeObjectEvidence(track)
+        analysis: this._analyzeObjectEvidence(track),
+        formation: this._objectFormationDiagnostic(track)
       }))
       .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   }
@@ -837,7 +972,8 @@ export class SubQGUniverseEvolution {
         unclassifiedCount: complex.unclassifiedCount ?? 0,
         meanCoherence: complex.meanCoherence ?? 0.0,
         meanContraction: complex.meanContraction ?? 0.0,
-        analysis: complex.analysis ?? this._analyzeComplexEvidence(complex)
+        analysis: complex.analysis ?? this._analyzeComplexEvidence(complex),
+        formation: this._complexFormationDiagnostic(complex)
       }))
       .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   }

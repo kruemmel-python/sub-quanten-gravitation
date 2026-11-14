@@ -97,6 +97,8 @@ input[type="range"] { width: 100%; accent-color: var(--cyan); cursor: pointer; }
 .metric-list.empty { opacity: .6; }
 .analysis-box { margin-top: 10px; padding: 10px; background: rgba(80,230,255,.035); border-left: 2px solid rgba(80,230,255,.38); }
 .analysis-box p { margin: 6px 0 0; color: #aabdc9; font-size: 9px; line-height: 1.5; }
+.analysis-box .diagnostic-label { margin-top: 12px; color: #55ddf8; }
+.analysis-box #connectionText { color: #b9e8df; }
 .target-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 11px; }
 .target-actions button { min-height: 33px; font-size: 9px; }
 .catalog-head { display: flex; justify-content: space-between; margin: 16px 0 7px; padding-bottom: 6px; border-bottom: 1px solid var(--line); color: var(--muted); font: 650 8px var(--mono); letter-spacing: .1em; }

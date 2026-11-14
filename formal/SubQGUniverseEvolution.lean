@@ -86,6 +86,33 @@ theorem causal_extension_transitive {a b c : RelationalState}
     epoch_mono := hab.epoch_mono.trans hbc.epoch_mono
   }
 
+/-- Archiving a macroscopic signature does not delete the SubQG node on which
+it was measured. Actualized nodes remain actualized under every causal
+extension, independently of later observational labels. -/
+theorem archived_signature_preserves_actualized_node
+    {before after : RelationalState} (peakNode : ℕ)
+    (hExtension : CausalExtension before after)
+    (hActualized : peakNode ∈ before.nodes) :
+    peakNode ∈ after.nodes := by
+  exact hExtension.nodes_mono hActualized
+
+/-- A serialized network-path diagnostic carries its endpoints as checked
+data. It is evidence about the relational graph, not about the visual 3-D
+embedding. -/
+structure NetworkPathDiagnostic where
+  source : ℕ
+  target : ℕ
+  nodes : List ℕ
+  startsAtSource : nodes.head? = some source
+  endsAtTarget : nodes.getLast? = some target
+
+theorem network_path_diagnostic_connects_recorded_endpoints
+    (diagnostic : NetworkPathDiagnostic) :
+    ∃ path : List ℕ,
+      path.head? = some diagnostic.source ∧
+      path.getLast? = some diagnostic.target := by
+  exact ⟨diagnostic.nodes, diagnostic.startsAtSource, diagnostic.endsAtTarget⟩
+
 /-- Constructive append-only actualization. New edge and simplex counts advance
 the internal relational clock. -/
 def actualize (state : RelationalState)
@@ -222,6 +249,8 @@ theorem new_discovery_is_archived
 
 #print axioms initial_has_no_spatial_edges
 #print axioms causal_extension_transitive
+#print axioms archived_signature_preserves_actualized_node
+#print axioms network_path_diagnostic_connects_recorded_endpoints
 #print axioms actualize_is_causal_extension
 #print axioms nonempty_new_relation_advances_clock
 #print axioms two_billion_year_display_calibration

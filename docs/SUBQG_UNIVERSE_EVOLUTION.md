@@ -92,6 +92,28 @@ Mögliche heutige Deutungen sind:
 Die Konfidenzen sind modellinterne Signaturwerte und keine astronomischen
 Messwahrscheinlichkeiten.
 
+## Entstehungs- und Netzdiagnostik
+
+Jeder Katalogeintrag enthält zusätzlich `formation`. Diese Diagnose wird aus
+dem bereits berechneten SubQG-Zustand abgeleitet und greift nicht in die
+Dynamik ein. Sie trennt drei Aussagen, die nicht verwechselt werden dürfen:
+
+- `mechanism` beschreibt das gemessene Gradientenbecken beziehungsweise die
+  relationale Komponentenbildung;
+- `radiantTrigger`, `orbitalTrigger` und `galaxyScoreComponents` legen offen,
+  welche Schwellen und Beiträge zur späteren Signaturbezeichnung führten;
+- `network` enthält den wirklichen Pfad durch aktive SubQG-Knoten. Für einen
+  Orbitalkandidaten werden der Pfad zum Wirtskern und seine Mitgliedschaft in
+  Strukturkomplexen angegeben. Für einen Komplex werden die Pfade vom
+  Ankerknoten zu allen Mitgliedern ausgegeben.
+
+`activeAtSnapshot: false` bedeutet, dass das zugehörige Gradientenbecken in der
+aktuellen Beobachtung nicht mehr als dieselbe Struktur erkannt wird. Das ist
+nicht gleichbedeutend mit einem abgetrennten Netzknoten: Die Kausalaktualisierung
+ist monoton, daher kann der zugrunde liegende Knoten weiterhin im Phasennetz
+liegen. Der Viewer bezeichnet diesen Unterschied ausdrücklich als
+„Struktursignatur archiviert“ gegenüber „Netzknoten weiter aktiv“.
+
 ## Explosive Übergänge
 
 Eine `SUPERNOVA_SIGNATURE` wird nicht über eine importierte

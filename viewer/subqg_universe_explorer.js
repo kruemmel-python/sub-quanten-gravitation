@@ -17,7 +17,8 @@ const dom = {
   toggleCinematic: $('#toggleCinematic'), toggleEdges: $('#toggleEdges'), starCount: $('#starCount'), planetCount: $('#planetCount'),
   unknownCount: $('#unknownCount'), complexCount: $('#complexCount'), eventCount: $('#eventCount'),
   objectTitle: $('#objectTitle'), objectSubtitle: $('#objectSubtitle'), objectTag: $('#objectTag'),
-  objectMetrics: $('#objectMetrics'), analysisText: $('#analysisText'), flyTo: $('#flyToTarget'),
+  objectMetrics: $('#objectMetrics'), analysisText: $('#analysisText'), formationText: $('#formationText'),
+  connectionText: $('#connectionText'), flyTo: $('#flyToTarget'),
   nextTarget: $('#nextTarget'), catalog: $('#targetCatalog'), catalogCount: $('#catalogCount'),
   targetLabel: $('#targetLabel'), toast: $('#toast'), rightPanel: $('.right-panel')
 };
@@ -360,6 +361,8 @@ function updateSelectionPanel() {
     dom.objectMetrics.className = 'metric-list empty';
     [...dom.objectMetrics.querySelectorAll('strong')].forEach(node => { node.textContent = '—'; });
     dom.analysisText.textContent = 'Die Klassifikation wird erst nach der Dynamik gebildet und verändert den SubQG-Zustand nicht.';
+    dom.formationText.textContent = 'Wähle ein Ziel, um seine gemessene Entstehungskette zu untersuchen.';
+    dom.connectionText.textContent = 'Noch kein Netzpfad gewählt.';
     dom.flyTo.disabled = true;
     return;
   }
@@ -385,6 +388,26 @@ function updateSelectionPanel() {
     ? `${resolved ? 'Aufgelöst' : 'Noch offen'} · ${candidates.slice(0, 3).map((candidate, index) =>
       `${index + 1}. ${hypothesisNames[candidate.interpretation] ?? candidate.interpretation.replaceAll('_', ' ')} ${(candidate.confidence * 100).toFixed(0)} %`).join(' · ')} · Fingerabdruck: ${evidence.nodeCount ?? target.data.memberCount ?? 0} Knoten/Mitglieder, Kohärenz ${formatScientific(evidence.coherence ?? evidence.meanCoherence ?? target.data.meanCoherence)}, Kontraktion ${formatScientific(evidence.contraction ?? evidence.meanContraction ?? target.data.meanContraction)}`
     : 'Noch keine belastbare Signaturhypothese. Das Objekt bleibt im neutralen Archiv erhalten.';
+  const formation = target.data.formation;
+  dom.formationText.textContent = formation?.mechanism ?? 'Für dieses archivierte Ziel liegt noch keine vollständige Entstehungsdiagnose vor.';
+  if (target.kind === 'complex') {
+    const network = formation?.network;
+    const score = formation?.galaxyScore;
+    dom.connectionText.textContent = network
+      ? `${network.allMembersConnected ? 'Verbunden' : 'Nicht vollständig verbunden'}: Anker Knoten ${network.anchorNode}, ${network.memberPaths.length} Mitglieder, maximal ${network.maximumMemberHops} aktive Netz-Hops. Galaxien-Score ${Number.isFinite(score) ? (score * 100).toFixed(1) : '—'} %. Die sichtbare Spiralform ist eine Messwertdarstellung, nicht die Ursache der Klassifikation.`
+      : 'Kein Komplexpfad verfügbar.';
+  } else {
+    const network = formation?.network;
+    const hostPart = network?.hostObjectId
+      ? ` Host ${network.hostObjectId.replace('subqg-', '')}: ${network.connectedToHost ? `${network.hostHops} Hops über ${network.hostPath.join(' → ')}` : 'kein aktiver Pfad'}.`
+      : '';
+    const complexPart = network?.containingComplexIds?.length
+      ? ` Mitglied von ${network.containingComplexIds.map(id => id.replace('subqg-', '')).join(', ')}.`
+      : '';
+    dom.connectionText.textContent = network
+      ? `${network.objectActive ? 'Struktur aktuell aktiv' : 'Struktursignatur archiviert'}; ihr Netzknoten ${network.peakNode} ist ${network.networkNodeActive ? 'weiter aktiv' : 'nicht aktiv'} und hat Grad ${network.directDegree}. ${network.connectedToGenesis ? `Mit der Genesis über ${network.genesisHops} Hops verbunden.` : 'Derzeit kein aktiver Pfad zur Genesis.'}${hostPart}${complexPart}`
+      : 'Kein Netzpfad verfügbar.';
+  }
   dom.flyTo.disabled = false;
   dom.rightPanel.classList.add('mobile-open');
   $$('.catalog-item').forEach(item => item.classList.toggle('selected', item.dataset.id === target.data.id));
@@ -720,6 +743,31 @@ function drawGraph(time) {
       context.lineTo(b.x, b.y);
       context.stroke();
     }
+  }
+
+  const selectedNetwork = state.selected?.data.formation?.network;
+  const selectedPaths = state.selected?.kind === 'complex'
+    ? (selectedNetwork?.memberPaths ?? []).map(path => path.nodes)
+    : [selectedNetwork?.hostPath?.length > 1 ? selectedNetwork.hostPath : selectedNetwork?.genesisPath].filter(Boolean);
+  if (selectedPaths.length) {
+    context.lineWidth = 2.1;
+    context.shadowColor = 'rgba(84,232,255,.9)';
+    context.shadowBlur = 9;
+    for (const path of selectedPaths) {
+      if (!path || path.length < 2) continue;
+      context.strokeStyle = 'rgba(84,232,255,.82)';
+      context.beginPath();
+      let started = false;
+      for (const node of path) {
+        const point = projected.get(node);
+        if (!point) { started = false; continue; }
+        if (!started) context.moveTo(point.x, point.y);
+        else context.lineTo(point.x, point.y);
+        started = true;
+      }
+      context.stroke();
+    }
+    context.shadowBlur = 0;
   }
 
   const objectAtNode = new Map(state.objectTargets.map(target => [target.data.peakNode, target]));
