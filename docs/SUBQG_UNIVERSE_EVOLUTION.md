@@ -187,6 +187,7 @@ Bedienung:
 
 - `W`, `A`, `S`, `D` für Vorwärts-, Rückwärts- und Seitenflug;
 - `Q` und `E` für Ab- und Aufstieg, Umschalt für den Boost;
+- `P` blendet den hervorgehobenen Diagnosepfad ein oder aus, auch im Vollbild;
 - Mausbewegung nach Aktivierung der Flugsteuerung für die Blickrichtung;
 - Linksklick auf einen Markierungsring im normalen Modus oder Linksklick auf
   das Ziel unter dem Fadenkreuz im Flugmodus zur Zielerfassung;

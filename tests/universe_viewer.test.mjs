@@ -13,7 +13,7 @@ const paths = {
 
 test('universe explorer exposes the flight and time controls', async () => {
   const html = await readFile(paths.html, 'utf8');
-  for (const id of ['universe', 'enterFlight', 'enterImmersive', 'exitImmersive', 'playSimulation', 'ageTimeline', 'targetCatalog', 'flyToTarget', 'toggleCinematic', 'formationText', 'connectionText']) {
+  for (const id of ['universe', 'enterFlight', 'enterImmersive', 'exitImmersive', 'playSimulation', 'ageTimeline', 'targetCatalog', 'flyToTarget', 'toggleCinematic', 'togglePaths', 'formationText', 'connectionText']) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
   assert.match(html, /type="module" src="\.\/subqg_universe_explorer\.js"/);
@@ -61,6 +61,8 @@ test('viewer supports free flight, target selection and responsive presentation'
   assert.match(client, /connectedToHost/);
   assert.match(client, /galaxyScore/);
   assert.match(client, /selectedNetwork/);
+  assert.match(client, /function toggleDiagnosticPaths/);
+  assert.match(client, /event\.code === 'KeyP'/);
   assert.match(css, /@media \(max-width: 760px\)/);
   assert.match(css, /body\.immersive \.topbar/);
 });

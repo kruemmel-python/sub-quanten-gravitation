@@ -14,7 +14,8 @@ const dom = {
   engineLight: $('#engineLight'), stage: $('#stageValue'), timeline: $('#ageTimeline'),
   play: $('#playSimulation'), reset: $('#resetSimulation'), simulationSpeed: $('#simulationSpeed'),
   flightSpeed: $('#flightSpeed'), flightSpeedValue: $('#flightSpeedValue'), camera: $('#cameraValue'),
-  toggleCinematic: $('#toggleCinematic'), toggleEdges: $('#toggleEdges'), starCount: $('#starCount'), planetCount: $('#planetCount'),
+  toggleCinematic: $('#toggleCinematic'), toggleEdges: $('#toggleEdges'), togglePaths: $('#togglePaths'),
+  starCount: $('#starCount'), planetCount: $('#planetCount'),
   unknownCount: $('#unknownCount'), complexCount: $('#complexCount'), eventCount: $('#eventCount'),
   objectTitle: $('#objectTitle'), objectSubtitle: $('#objectSubtitle'), objectTag: $('#objectTag'),
   objectMetrics: $('#objectMetrics'), analysisText: $('#analysisText'), formationText: $('#formationText'),
@@ -36,6 +37,7 @@ const state = {
   playing: false,
   cinematic: true,
   edgesVisible: false,
+  pathsVisible: true,
   filters: { star: true, planet: true, unknown: true, complex: true, events: true },
   camera: { x: 0, y: 28, z: 490, yaw: 0, pitch: -0.055 },
   keys: new Set(),
@@ -749,7 +751,7 @@ function drawGraph(time) {
   const selectedPaths = state.selected?.kind === 'complex'
     ? (selectedNetwork?.memberPaths ?? []).map(path => path.nodes)
     : [selectedNetwork?.hostPath?.length > 1 ? selectedNetwork.hostPath : selectedNetwork?.genesisPath].filter(Boolean);
-  if (selectedPaths.length) {
+  if (state.pathsVisible && selectedPaths.length) {
     context.lineWidth = 2.1;
     context.shadowColor = 'rgba(84,232,255,.9)';
     context.shadowBlur = 9;
@@ -1035,6 +1037,13 @@ dom.toggleEdges.addEventListener('click', () => {
   state.edgesVisible = !state.edgesVisible;
   dom.toggleEdges.classList.toggle('active', state.edgesVisible);
 });
+function toggleDiagnosticPaths() {
+  state.pathsVisible = !state.pathsVisible;
+  dom.togglePaths.classList.toggle('active', state.pathsVisible);
+  dom.togglePaths.setAttribute('aria-pressed', String(state.pathsVisible));
+  showToast(state.pathsVisible ? 'Diagnosepfad sichtbar' : 'Diagnosepfad ausgeblendet');
+}
+dom.togglePaths.addEventListener('click', toggleDiagnosticPaths);
 
 $$('[data-filter]').forEach(input => input.addEventListener('change', () => {
   state.filters[input.dataset.filter] = input.checked;
@@ -1100,6 +1109,11 @@ canvas.addEventListener('wheel', event => {
 }, { passive: false });
 
 window.addEventListener('keydown', event => {
+  if (event.code === 'KeyP') {
+    event.preventDefault();
+    toggleDiagnosticPaths();
+    return;
+  }
   if (event.code === 'KeyU') {
     event.preventDefault();
     if (state.immersive) exitImmersiveMode(); else enterImmersiveMode();
